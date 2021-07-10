@@ -1,0 +1,73 @@
+[
+  {
+    "creator_id": "abcd-132-2",
+    "fraction_for_sale": 30,
+    "fractions_sold": 10,
+    "price_per_fraction": 400,
+    "time": "23 july 2021",
+    "buyers": [
+      {
+        "buyer_id": "abcd-132-4"
+      },
+      {
+        "buyer_id": "abcd-132-1"
+      },
+      {
+        "buyer_id": "abcd-132-6"
+      }
+    ]
+  },
+  {
+    "creator_id": "abcd-132-2",
+    "fraction_for_sale": 30,
+    "fractions_sold": 10,
+    "price_per_fraction": 400,
+    "time": "23 july 2021",
+    "buyers": [
+      {
+        "buyer_id": "abcd-132-4"
+      },
+      {
+        "buyer_id": "abcd-132-1"
+      },
+      {
+        "buyer_id": "abcd-132-6"
+      }
+    ]
+  },
+  {
+    "creator_id": "abcd-132-2",
+    "fraction_for_sale": 30,
+    "fractions_sold": 10,
+    "price_per_fraction": 400,
+    "time": "23 july 2021",
+    "buyers": [
+      {
+        "buyer_id": "abcd-132-4"
+      },
+      {
+        "buyer_id": "abcd-132-1"
+      },
+      {
+        "buyer_id": "abcd-132-6"
+      }
+    ]
+  },
+  {
+    "creator_id": "abcd-132-2",
+    "fraction_for_sale": 30,
+    "fractions_sold": 10,
+    "price_per_fraction": 40,
+    "buyers": [
+      {
+        "buyer_id": "abcd-132-4"
+      },
+      {
+        "buyer_id": "abcd-132-1"
+      },
+      {
+        "buyer_id": "abcd-132-6"
+      }
+    ]
+  }
+]

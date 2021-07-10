@@ -1,0 +1,177 @@
+[
+  {
+    "email": "creator@creatorverse.com",
+    "wallet_address": "creator World",
+    "profile_image": "https://images.unsplash.com/photo-1551179939-b839002d0a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+    "creator_subscribed": [
+      {
+        "creator_id": "abcd-132-1",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-3",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-5",
+        "status": false
+      }
+    ],
+    "creator_fraction_owned": 1200,
+    "creator_rewards": [
+      {
+        "reward_id": "bbcd-132-1"
+      }
+    ]
+  },
+  {
+    "email": "creator@creatorverse.com",
+    "wallet_address": "creator World",
+    "profile_image": "https://images.unsplash.com/photo-1551179939-b839002d0a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+    "creator_subscribed": [
+      {
+        "creator_id": "abcd-132-1",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-3",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-5",
+        "status": false
+      }
+    ],
+    "creator_fraction_owned": 1200,
+    "creator_rewards": [
+      {
+        "reward_id": "bbcd-132-1"
+      }
+    ]
+  },
+  {
+    "email": "creator@creatorverse.com",
+    "wallet_address": "creator World",
+    "profile_image": "https://images.unsplash.com/photo-1551179939-b839002d0a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+    "creator_subscribed": [
+      {
+        "creator_id": "abcd-132-1",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-3",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-5",
+        "status": false
+      }
+    ],
+    "creator_fraction_owned": 1200,
+    "creator_rewards": [
+      {
+        "reward_id": "bbcd-132-1"
+      }
+    ]
+  },
+  {
+    "email": "creator@creatorverse.com",
+    "wallet_address": "creator World",
+    "profile_image": "https://images.unsplash.com/photo-1551179939-b839002d0a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+    "creator_subscribed": [
+      {
+        "creator_id": "abcd-132-1",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-3",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-5",
+        "status": false
+      }
+    ],
+    "creator_fraction_owned": 1200,
+    "creator_rewards": [
+      {
+        "reward_id": "bbcd-132-1"
+      }
+    ]
+  },
+  {
+    "email": "creator@creatorverse.com",
+    "wallet_address": "creator World",
+    "profile_image": "https://images.unsplash.com/photo-1551179939-b839002d0a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+    "creator_subscribed": [
+      {
+        "creator_id": "abcd-132-1",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-3",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-5",
+        "status": false
+      }
+    ],
+    "creator_fraction_owned": 1200,
+    "creator_rewards": [
+      {
+        "reward_id": "bbcd-132-1"
+      }
+    ]
+  },
+  {
+    "email": "creator@creatorverse.com",
+    "wallet_address": "creator World",
+    "profile_image": "https://images.unsplash.com/photo-1551179939-b839002d0a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+    "creator_subscribed": [
+      {
+        "creator_id": "abcd-132-1",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-3",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-5",
+        "status": false
+      }
+    ],
+    "creator_fraction_owned": 1200,
+    "creator_rewards": [
+      {
+        "reward_id": "bbcd-132-1"
+      }
+    ]
+  },
+  {
+    "email": "creator@creatorverse.com",
+    "wallet_address": "creator World",
+    "profile_image": "https://images.unsplash.com/photo-1551179939-b839002d0a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+    "creator_subscribed": [
+      {
+        "creator_id": "abcd-132-1",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-3",
+        "status": "subscribed"
+      },
+      {
+        "creator_id": "abcd-132-5",
+        "status": false
+      }
+    ],
+    "creator_fraction_owned": 1200,
+    "creator_rewards": [
+      {
+        "reward_id": "bbcd-132-1"
+      }
+    ]
+  }
+]

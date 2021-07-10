@@ -1,38 +1,147 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap");
+
+* {
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --primary: #00689f;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.active {
+  color: var(--primary) !important;
+}
+.active_bg {
+  background-color: var(--primary) !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.view-all {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom {
+  background-color: #96a9c4 !important;
+  border-color: #96a9c4 !important;
+}
+
+.rounded-5 {
+  border-radius: 20px !important;
+}
+
+p {
+  line-height: 2 !important;
+}
+
+.btn-primary {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.blockquote::before,
+.blockquote::after {
+  content: "“";
+  position: absolute;
+  font-size: 60px;
+  top: -10px;
+  height: 40px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  left: -25px;
 }
 
-.App-link {
-  color: #61dafb;
+.blockquote::after {
+  top: auto;
+  left: auto;
+  right: -15px;
+  bottom: -10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.blockquote {
+  position: relative;
+  font-size: 20px;
+}
+
+.slick-dots li button:before {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+  content: "";
+  opacity: 1;
+}
+.slick-dots .slick-active button:before {
+  opacity: 1;
+  background-color: var(--primary);
+}
+
+.tick {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  z-index: 10;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.tick svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  fill: #00689f;
+}
+
+.tab_btn {
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #222;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.tab_btn.active,
+.tab_btn:hover {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+
+.slick-next:before,
+.slick-prev:before {
+  color: var(--primary);
+  opacity: 1;
+  font-size: 30px;
+}
+
+.slick-disabled {
+  display: none !important;
+}
+
+.input-group > * {
+  border-radius: 0 0 0 0 !important;
+}
+
+.input-group > :first-child {
+  border-top-left-radius: 300rem !important;
+  border-bottom-left-radius: 300rem !important;
+}
+.input-group > :last-child {
+  border-top-right-radius: 300rem !important;
+  border-bottom-right-radius: 300rem !important;
+}
+
+.text-success {
+  color: #30bb38 !important;
+}
+.res {
+  resize: none;
+}
+
+.f-sm {
+  font-size: 0.85rem;
 }
