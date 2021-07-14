@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../images/logo.png";
+import { useData } from "./../../context/DataContext";
+import Menu from "@material-ui/core/Menu";
+import { MenuItem } from "@material-ui/core";
+
+// import link from react-router-dom/Link;
+// import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { activeUser, setActiveUser, investors } = useData();
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <nav className="navbar navbar-expand-lg py-3 navbar-light bg-light">
       <div className="container">
@@ -68,14 +85,45 @@ const Navbar = () => {
               </NavLink>
             </li>
           </ul>
-          <form className="d-flex">
-            <img
-              src="https://images.unsplash.com/photo-1551179939-b839002d0a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-              alt="Person"
-              width="40"
-              className="rounded-3"
-            />
-          </form>
+          <div className="d-flex">
+            {activeUser ? (
+              <>
+                <img
+                  src="https://images.unsplash.com/photo-1551179939-b839002d0a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                  alt="Person"
+                  width="40"
+                  onClick={handleClick}
+                  className="rounded-3"
+                />
+                <Menu
+                  id="fade-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={open}
+                  onClose={handleClose}
+                >
+                  {investors.map((person, index) => (
+                    <MenuItem
+                      onClick={() => {
+                        handleClose();
+                        setActiveUser(person);
+                      }}
+                    >
+                      {person.name}
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setActiveUser(investors[0] || {})}
+                className="btn btn-primary"
+              >
+                Login
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </nav>

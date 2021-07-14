@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
-import creatorsJSON from "../../JSON/creators.json";
+import React from "react";
 import { BsArrowRight } from "react-icons/bs";
 import ProfileCard from "../utils/ProfileCard";
+import { useData } from "../../context/DataContext";
 const Presale = () => {
-  const [creators, setCreators] = useState([]);
-  useEffect(() => {
-    setCreators(
-      creatorsJSON
-        .map(({ name, profile_image }) => ({ name, profile_image }))
-        .slice(0, 6)
-    );
-  }, []);
+  const { creators } = useData();
+
   return (
     <section className="py-4">
       <div className="container">
@@ -23,7 +17,7 @@ const Presale = () => {
           </div>
         </h3>
         <div className="row">
-          {creators.map((el) => (
+          {creators.slice(0, 6).map((el) => (
             <ProfileCard {...el} />
           ))}
         </div>
