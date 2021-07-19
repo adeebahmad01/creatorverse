@@ -105,6 +105,14 @@ p {
   transition: all 0.3s ease-in-out;
 }
 
+.transition {
+  transition: all 0.3s ease-in-out;
+}
+
+.custom_track .slick-track {
+  padding: 1.5rem 0;
+}
+
 .tab_btn.active,
 .tab_btn:hover {
   color: var(--primary);
@@ -144,4 +152,11 @@ p {
 
 .f-sm {
   font-size: 0.85rem;
+}
+
+.name {
+  color: #222;
+}
+a {
+  text-decoration: none !important;
 }

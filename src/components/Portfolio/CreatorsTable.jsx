@@ -1,7 +1,9 @@
 import React from "react";
 import HoverableTableRow from "./../utils/Popover";
+import { useData } from "../../context/DataContext";
 
 const CreatorsTable = () => {
+  const { activeUser } = useData();
   return (
     <div>
       <div className="container">
@@ -17,8 +19,8 @@ const CreatorsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {[1, 2, 3, 4, 5, 6].map((el, i) => (
-              <HoverableTableRow i={i} />
+            {activeUser.creators_subscribed.map((el, i) => (
+              <HoverableTableRow {...el} i={i} />
             ))}
           </tbody>
         </table>

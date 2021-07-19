@@ -77,7 +77,9 @@ const Row = ({ data, setImages, row, i }) => {
             key={i}
           >
             {row[el.name]?.name}
-            <span className="text-capitalize">({row[el.name]?.unit})</span>
+            {row?.[el.name]?.unit && (
+              <span className="text-capitalize">({row?.[el.name]?.unit})</span>
+            )}
           </TableCell>
         ))}
         {active?.images?.map((el, i) => (

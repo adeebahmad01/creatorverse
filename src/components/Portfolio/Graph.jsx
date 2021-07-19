@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ReactApexCharts from "react-apexcharts";
+import { useData } from "../../context/DataContext";
 
 const Graph = () => {
+  const { activeUser } = useData();
   const [state] = useState({
     series: [
       {
@@ -36,11 +38,20 @@ const Graph = () => {
       },
     },
   });
+  // multiply all prices: number and fractions_owned: number owned in activeUser.creators_subscribed = [] by reduce method
+  const total = activeUser.creators_subscribed.reduce((acc, curr) => {
+    const price = curr.price;
+    const fractions_owned = curr.fractions_owned;
+    console.log({ price, fractions_owned });
+    const price_fractions_owned = price * fractions_owned;
+    return acc + price_fractions_owned;
+  }, 0);
+  console.log(total);
   return (
     <div>
       <div className="container">
         <div className="fw-bold">
-          <h1 className="active fw-bold">$2,345.00</h1>
+          <h1 className="active fw-bold">${total.toLocaleString()}</h1>
           <p>
             <span className="text-success">+2.21$(+4.56%)</span> Today
           </p>

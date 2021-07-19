@@ -1,5 +1,4 @@
 import React from "react";
-import creator from "../../JSON/creator.json";
 import { BsArrowRight } from "react-icons/bs";
 import {
   AiFillFacebook,
@@ -7,15 +6,15 @@ import {
   AiOutlineInstagram,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
-const CreatorInfo = () => {
+const CreatorInfo = ({ creator, presale, isProfile = false }) => {
   return (
     <div className="py-5">
       <div className="container">
         <div className="row">
           <div className="col-lg-3 px-5">
             <img
-              className="w-100 rounded-5"
-              src={creator.profile_image}
+              className="w-100 shadow-sm rounded-5 objfit"
+              src={creator.profile_image?.[0]?.src}
               alt={creator.name}
             />
           </div>
@@ -42,13 +41,15 @@ const CreatorInfo = () => {
               </a>
             </h3>
             <p>{creator.bio}</p>
-            <Link
-              to="/presale"
-              className="btn text-white btn-primary px-4 py-2 rounded-pill"
-            >
-              <span className="h6 me-2">See Profile</span>
-              <BsArrowRight style={{ width: "1.5rem", height: "1.5rem" }} />
-            </Link>
+            {!isProfile && (
+              <Link
+                to={"/profile" + (creator.id ? "/" + creator.id : "")}
+                className="btn text-white btn-primary px-4 py-2 rounded-pill"
+              >
+                <span className="h6 me-2">See Profile</span>
+                <BsArrowRight style={{ width: "1.5rem", height: "1.5rem" }} />
+              </Link>
+            )}
           </div>
         </div>
       </div>

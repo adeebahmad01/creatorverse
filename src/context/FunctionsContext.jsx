@@ -77,8 +77,9 @@ const FunctionsContextProvider = ({ children }) => {
     rewards: {
       selects: [{ name: "creators", options: creators }],
       inputs: [
+        { name: "name" },
         { name: "description", multiline, rows, maxlength: 500 },
-        { name: "price", type: { name: `number`, unit: "$" } },
+        { name: "price", type: { name: `number` } },
       ],
       images: [{ name: "image" }],
     },

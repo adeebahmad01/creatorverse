@@ -16,7 +16,7 @@ import Navbar from "./components/Navbar";
 import Postsale from "./pages/postsale";
 import Profile from "./pages/profile";
 import ExportRewards from "./pages/exportRewards";
-import RadeemRewards from "./pages/radeemRewards";
+import RadeemRewards from "./pages/redeemRewards";
 import ViewReward from "./pages/viewReward";
 import DataContextProvider from "./context/DataContext";
 import FunctionsContextProvider from "./context/FunctionsContext";
@@ -70,24 +70,25 @@ function App() {
                 <PublicRoutes exact path="/" exact component={Home} />
                 <PublicRoutes exact path="/portfolio" component={Portfolio} />
                 <PublicRoutes exact path="/rewardbay" component={RewardBay} />
-                <PublicRoutes exact path="/presale" component={Presale} />
-                <PublicRoutes exact path="/postsale" component={Postsale} />
-                <PublicRoutes exact path="/profile" component={Profile} />
+                <PublicRoutes exact path="/presale/:id" component={Presale} />
+                <PublicRoutes exact path="/postsale/:id" component={Postsale} />
+                <PublicRoutes exact path="/profile/:id" component={Profile} />
                 <PublicRoutes
                   exact
-                  path="/export_rewards"
+                  path="/export_rewards/:id"
                   component={ExportRewards}
                 />
                 <PublicRoutes
                   exact
-                  path="/radeem_rewards"
+                  path="/redeem_rewards/:id"
                   component={RadeemRewards}
                 />
                 <PublicRoutes
                   exact
-                  path="/view_reward"
-                  component={ViewReward}
+                  path="/presale"
+                  component={() => <div>No PreSales By This Creator</div>}
                 />
+                <PublicRoutes exact path="/reward/:id" component={ViewReward} />
                 <PublicRoutes
                   restricted
                   exact

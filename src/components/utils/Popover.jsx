@@ -1,10 +1,27 @@
 import Popover from "@material-ui/core/Popover";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactApexCharts from "react-apexcharts";
 import { Link } from "react-router-dom";
-export default function HoverableTableRow({ i = 0 }) {
+import { useData } from "../../context/DataContext";
+export default function HoverableTableRow({
+  creatorId,
+  market_value,
+  day_gain,
+  gain,
+  fractions_owned,
+  price,
+}) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [random] = useState(Math.floor(Math.random() * 6) + 1);
+  const { creators = [], presales } = useData();
+  const [creator, setCreator] = useState({});
+  useEffect(() => {
+    if (creatorId) {
+      setCreator(creators.find((creator) => creator.id === creatorId));
+    }
+  }, [creatorId, creators]);
+  const presale = presales.find(
+    (presale) => presale.creators.name === creator.id
+  );
   const [state] = useState({
     series: [
       {
@@ -46,7 +63,6 @@ export default function HoverableTableRow({ i = 0 }) {
   const handlePopoverClose = () => {
     setAnchorEl(null);
   };
-
   const open = Boolean(anchorEl);
   const id = open ? "mouse-over-popover" : undefined;
 
@@ -58,13 +74,17 @@ export default function HoverableTableRow({ i = 0 }) {
       style={{ fontWeight: `500`, verticalAlign: `middle` }}
     >
       <td align="left">
-        <img
-          width={70}
-          className="rounded-5 shadow-sm d-inline-block my-2 me-2"
-          src="https://images.unsplash.com/photo-1551179939-b839002d0a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-          alt=""
-        />
-        Creator Name
+        <div
+          className="my-2 me-2"
+          style={{ width: "70px", display: `inline-block` }}
+        >
+          <img
+            className="rounded-5 w-100 objfit shadow-sm d-inline-block"
+            src={creator.profile_image?.[0].src}
+            alt={creator.name}
+          />
+        </div>
+        {creator.name}
         <Popover
           id={id}
           disableScrollLock
@@ -90,7 +110,9 @@ export default function HoverableTableRow({ i = 0 }) {
         >
           <div>
             <div className="d-flex w-100 justify-content-between align-items-center">
-              <h5 className="active">$2,345</h5>
+              <h5 className="active">
+                ${(fractions_owned * price).toLocaleString()}
+              </h5>
               <span className=" f-sm d-inline-block ms-2">
                 <span className="text-success">+2.21$(+4.56%)</span> Today
               </span>
@@ -108,13 +130,13 @@ export default function HoverableTableRow({ i = 0 }) {
             </div>
             <div className="text-end">
               <Link
-                to="/postsale"
+                to={"/postsale/" + presale?.id}
                 className="btn text-white btn-primary me-3 px-5 py-2 rounded-pill"
               >
                 <span className="h6">Buy</span>
               </Link>
               <Link
-                to="/postsale"
+                to={"/postsale/" + presale?.id}
                 className="btn text-white btn-dark px-5 py-2 rounded-pill"
               >
                 <span className="h6">Sell</span>
@@ -123,23 +145,11 @@ export default function HoverableTableRow({ i = 0 }) {
           </div>
         </Popover>
       </td>
-      <td>800</td>
-      <td>80.00$</td>
-      <td>8,000.00$</td>
-      <td
-        className={
-          random === i ? "text-success" : random + 1 === i ? "text-danger" : ""
-        }
-      >
-        4.95%
-      </td>
-      <td
-        className={
-          random === i ? "text-success" : random + 1 === i ? "text-danger" : ""
-        }
-      >
-        9.95%
-      </td>
+      <td>{fractions_owned}</td>
+      <td>{(fractions_owned * price).toLocaleString()}</td>
+      <td>{(market_value || 0).toFixed(2)}</td>
+      <td>{(day_gain || 0).toFixed(2)}</td>
+      <td>{(gain || 0).toFixed(2)}</td>
     </tr>
   );
 }

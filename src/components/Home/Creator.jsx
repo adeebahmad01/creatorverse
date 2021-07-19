@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import creatorsJSON from "../../JSON/creators.json";
 import { useData } from "../../context/DataContext";
 const Creator = () => {
-  const { creators } = useData();
+  const { creators = [], presales = [] } = useData();
   return (
     <div className="py-5">
       <div className="container">
@@ -19,9 +19,9 @@ const Creator = () => {
                     height="315"
                     src={el.youtube_link}
                     title="YouTube video player"
-                    frameborder="0"
+                    frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
+                    allowFullScreen
                   ></iframe>
                 </div>
                 <div className="col-lg-6">
@@ -30,14 +30,23 @@ const Creator = () => {
                       <img
                         src={el.profile_image?.[0]?.src}
                         alt="Person"
-                        className="rounded-5 shadow-sm w-100"
+                        className="rounded-5 objfit shadow-sm w-100"
                       />
                     </div>
                     <div className="col-8">
                       <h2>{el.name}</h2>
                       <p>{el.bio}</p>
                       <Link
-                        to={`/presale/${el.id}`}
+                        to={`/presale${
+                          presales.find(
+                            (presale) => presale.creators?.name === el.id
+                          )?.id
+                            ? "/" +
+                              presales.find(
+                                (presale) => presale.creators?.name === el.id
+                              )?.id
+                            : ""
+                        }`}
                         className="btn text-white btn-primary px-4 py-2 rounded-pill"
                       >
                         <span className="h6 me-2">Buy Presale</span>

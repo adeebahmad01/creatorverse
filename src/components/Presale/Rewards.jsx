@@ -1,12 +1,11 @@
 import React from "react";
-import rewards from "../../JSON/rewards.json";
 import RewardCard from "../utils/RewardCard";
 
-const Rewards = () => {
+const Rewards = ({ rewards = [] }) => {
   return (
     <div>
-      {rewards.map((el) => (
-        <RewardCard {...el} />
+      {rewards.map((el, i) => (
+        <RewardCard {...el} i={i + 1} />
       ))}
     </div>
   );

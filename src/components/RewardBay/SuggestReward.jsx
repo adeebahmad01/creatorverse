@@ -1,8 +1,23 @@
 import React from "react";
-import rewards from "../../JSON/rewards.json";
 import RewardCard from "./../utils/RewardCard";
+import { useData } from "../../context/DataContext";
 
-const SuggestReward = () => {
+const SuggestReward = ({ active = 0 }) => {
+  const { rewards: rewardsAll, creators, activeUser } = useData();
+  const [rewards, setRewards] = React.useState([]);
+  //
+  const creator =
+    creators.find(
+      (creator) =>
+        creator.id === activeUser.creators_subscribed[active]?.creatorId
+    ) || {};
+  // set rewards by creator
+  React.useEffect(() => {
+    setRewards(
+      rewardsAll.filter((reward) => reward?.creators?.name === creator.id)
+    );
+  }, [creator, rewardsAll]);
+
   return (
     <div className="py-5">
       <div className="container">

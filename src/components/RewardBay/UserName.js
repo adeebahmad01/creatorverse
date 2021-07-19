@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useData } from "../../context/DataContext";
 
 const UserName = () => {
+  const { activeUser } = useData();
   return (
     <div>
       <div className="container py-3 text-center d-flex justify-content-center align-items-center custom rounded-5">
@@ -50,7 +52,7 @@ const UserName = () => {
             </svg>
           </div>
           <div>
-            <h5>Username</h5>
+            <h5>{activeUser.name}</h5>
             <div>Member</div>
           </div>
         </div>

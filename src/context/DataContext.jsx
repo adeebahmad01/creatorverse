@@ -19,6 +19,7 @@ class DataContextProvider extends Component {
     activeUser: {},
     pageLoaded: false,
     allLoaded: false,
+    activeIndex: 0,
   };
   getData = (type, typeLoaded) => {
     this.setState({ [typeLoaded]: false });
@@ -39,7 +40,11 @@ class DataContextProvider extends Component {
   };
   UNSAFE_componentWillUpdate(prevProps, prevState) {
     const { pageLoaded, allLoaded } = prevState;
-
+    if (prevState.investors !== this.state.investors) {
+      this.setState({
+        activeUser: prevState.investors[this.state.activeIndex],
+      });
+    }
     if (
       !values.map((el) => prevState[`${el}Loaded`]).includes(false) &&
       pageLoaded &&
@@ -51,12 +56,18 @@ class DataContextProvider extends Component {
       setTimeout(() => el.remove(), 1000);
     }
   }
+  setactiveIndex = (activeIndex) => this.setState({ activeIndex });
   setActiveUser = (activeUser) => this.setState({ activeUser });
   get = (a) => a.current.value;
   render() {
     return (
       <DataContext.Provider
-        value={{ ...this.state, values, setActiveUser: this.setActiveUser }}
+        value={{
+          ...this.state,
+          values,
+          setActiveUser: this.setActiveUser,
+          setactiveIndex: this.setactiveIndex,
+        }}
       >
         {this.state.allLoaded && this.props.children}
       </DataContext.Provider>

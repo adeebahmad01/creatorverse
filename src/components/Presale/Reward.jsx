@@ -1,6 +1,5 @@
 import React from "react";
-import rewards from "../../JSON/rewards.json";
-const Reward = () => {
+const Reward = ({ youtube_link, rewards }) => {
   return (
     <div>
       <div className="container px-4 py-2 custom rounded-5">
@@ -10,11 +9,11 @@ const Reward = () => {
               width="100%"
               className="rounded-3"
               height="315"
-              src="https://www.youtube.com/embed/FJjLXEDWKMg"
+              src={youtube_link}
               title="YouTube video player"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
           <div className="col-lg-7">

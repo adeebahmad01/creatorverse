@@ -72,7 +72,8 @@ const Add = () => {
       if (active.id) {
         el.ref.current.value = active[el.placeholder] || "";
         if (el.type?.name === "number")
-          el.ref.current.value = active[el.placeholder]?.match(/\d+/g) || "";
+          el.ref.current.value =
+            active[el.placeholder]?.match?.(/\d+/g) || active[el.placeholder];
       }
     });
     [...Object.values(tagRefs)].forEach((el) => {
@@ -80,7 +81,8 @@ const Add = () => {
         el.ref.current.value = active?.tags?.[el.placeholder] || "";
         if (el.type?.name === "number")
           el.ref.current.value =
-            active?.tags?.[el.placeholder]?.match(/\d+/g) || "";
+            active?.tags?.[el.placeholder]?.match(/\d+/g) ||
+            active[el.placeholder];
       }
     });
   }, [active]);

@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import ReactApexCharts from "react-apexcharts";
 import { Link } from "react-router-dom";
-const CreatorDetails = () => {
+import { useData } from "../../context/DataContext";
+
+const CreatorDetails = ({ active }) => {
+  const { creators, activeUser, presales } = useData();
+  const personActive = activeUser.creators_subscribed[active] || {};
+  const creator =
+    creators.find((creator) => creator.id === personActive?.creatorId) || {};
+  const presale =
+    presales.find((presale) => presale.creators.name === creator.id) || {};
   const [state] = useState({
     series: [
       {
@@ -41,11 +49,16 @@ const CreatorDetails = () => {
       <div className="container">
         <div className="row py-4">
           <div className="col-lg-4">
-            <h2>Creator Name</h2>
+            <h2>{creator.name}</h2>
           </div>
           <div className="col-lg-8">
             <div className="d-flex fw-bold align-items-center justify-content-between">
-              <h3 className="active">$2,345</h3>
+              <h3 className="active">
+                $
+                {(
+                  personActive.fractions_owned * personActive.price || 0
+                ).toLocaleString()}
+              </h3>
               <span>
                 <span className="text-success">+2.21$(+4.56%)</span> Today
               </span>
@@ -58,7 +71,7 @@ const CreatorDetails = () => {
         <div className="row">
           <div className="col-lg-4">
             <h5>Fractions You Own</h5>
-            <h1 className="active fw-bold">9</h1>
+            <h1 className="active fw-bold"> {personActive.fractions_owned} </h1>
           </div>
           <div className="col-lg-8">
             <ReactApexCharts
@@ -69,13 +82,13 @@ const CreatorDetails = () => {
             />
             <div className="text-end">
               <Link
-                to="/postsale"
+                to={"/postsale/" + presale.id}
                 className="btn text-white btn-primary me-3 px-5 py-2 rounded-pill"
               >
                 <span className="h6">Buy</span>
               </Link>
               <Link
-                to="/postsale"
+                to={"/postsale/" + presale.id}
                 className="btn text-white btn-dark px-5 py-2 rounded-pill"
               >
                 <span className="h6">Sell</span>

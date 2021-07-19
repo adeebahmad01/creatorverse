@@ -1,11 +1,10 @@
 import React from "react";
 import RewardCard from "../components/utils/RewardCard";
-// import reward from "../JSON/reward.json";
-import Details from "../components/ViewReward/Details";
-import { useParams } from "react-router-dom";
+import Redeem from "../components/Redeem/Redeem";
 import { useData } from "../context/DataContext";
+import { useParams } from "react-router-dom";
 
-const ViewReward = () => {
+const RadeemRewards = () => {
   const { id } = useParams();
   const { rewards } = useData();
   const [reward, setReward] = React.useState(null);
@@ -14,13 +13,12 @@ const ViewReward = () => {
       setReward(rewards.find((r) => r.id === id));
     }
   }, [id, rewards]);
-
   return (
-    <div>
-      <RewardCard {...reward} i={1} export details redeem />
-      <Details />
+    <div className="py-5">
+      <RewardCard {...reward} i={1} export />
+      <Redeem {...reward} />
     </div>
   );
 };
 
-export default ViewReward;
+export default RadeemRewards;

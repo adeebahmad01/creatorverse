@@ -5,12 +5,13 @@ import UserName from "../components/RewardBay/UserName";
 import SuggestReward from "../components/RewardBay/SuggestReward";
 
 const RewardBay = () => {
+  const [active, setActive] = React.useState(0);
   return (
     <div>
       <UserName />
-      <Creators />
-      <CreatorDetails />
-      <SuggestReward />
+      <Creators active={active} setActive={setActive} />
+      <CreatorDetails active={active} />
+      <SuggestReward active={active} />
     </div>
   );
 };
