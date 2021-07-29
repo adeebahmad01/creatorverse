@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TextField } from "@material-ui/core";
 import { db } from "../../config/Firebase";
 import { useData } from "./../../context/DataContext";
@@ -8,6 +8,8 @@ const PresaleSale = ({ presale }) => {
   const ref = useRef(null);
   const { activeUser } = useData();
   const { setError } = useHandling();
+  const [timeLeft, setTimeLeft] = useState({});
+  const times = ["hours", "minutes", "seconds"];
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -56,13 +58,39 @@ const PresaleSale = ({ presale }) => {
       setError(err);
     }
   };
+  useEffect(() => {
+    const updateTime = () => {
+      const timer = new Date(presale.end_time || Date.now()).getTime();
+      const now = Date.now();
+      const remainingTime = timer - now;
+      const prevSeconds = Math.floor(remainingTime / 1000);
+      const prevMinutes = Math.floor(prevSeconds / 60);
+      const seconds = prevSeconds % 60;
+      const hours = Math.floor(prevMinutes / 60);
+      const minutes = prevMinutes % 60;
+      if (hours >= 0 && minutes >= 0 && seconds >= 0)
+        setTimeLeft({ seconds, minutes, hours });
+    };
+    const myInterval = setInterval(updateTime, 1000);
+    return () => clearInterval(myInterval);
+  }, [presale.end_time]);
   return (
     <div className="py-5">
       <div className="container">
         <div className="row mb-3">
           <div className="col-lg">
             <h6>Sale Ends In</h6>
-            <h1 className="active fw-bold">32: 45: 45</h1>
+            <h1 className="active fw-bold">
+              {times
+                .map((el) =>
+                  timeLeft[el] > 9
+                    ? timeLeft[el]
+                    : timeLeft[el]
+                    ? "0" + timeLeft[el]
+                    : "00"
+                )
+                .join(":")}
+            </h1>
           </div>
           <div className="col-lg">
             <h6>Price Per Unit</h6>
@@ -94,9 +122,7 @@ const PresaleSale = ({ presale }) => {
           <div className="col-lg-4">
             <h6>Fractions You Own</h6>
             <h1 className="active fw-bold">
-              {(
-                +presale.total_fractions - +presale.fractions_sold
-              )?.toLocaleString()}
+              {(+activeUser.fractions_owned)?.toLocaleString()}
             </h1>
           </div>
           <div className="col-lg-5">

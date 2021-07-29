@@ -5,6 +5,7 @@ import Summary from "../components/utils/Summary";
 import Rewards from "../components/Presale/Rewards";
 import { useParams } from "react-router-dom";
 import { useData } from "../context/DataContext";
+import ReactPlayer from "react-player"
 const Postsale = () => {
   const { id } = useParams();
   const { creators = [], presales = [], rewards: rewardsAll = [] } = useData();

@@ -8,7 +8,7 @@ const Recomended = () => {
     <section className="py-4">
       <div className="container">
         <h3 className="mb-4 text-center position-relative">
-          Recomended Creators
+          Recommended Creators
           <div className="view-all h6 position-absolute">
             <a href="#" className="text-decoration-none active">
               View All <BsArrowRight />

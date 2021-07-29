@@ -1,20 +1,12 @@
 import React from "react";
+import ReactPlayer from "react-player";
 const Reward = ({ youtube_link, rewards }) => {
   return (
     <div>
       <div className="container px-4 py-2 custom rounded-5">
         <div className="row">
           <div className="col-lg-5 d-flex justify-content-center align-items-center">
-            <iframe
-              width="100%"
-              className="rounded-3"
-              height="315"
-              src={youtube_link}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+            <ReactPlayer className="objfit" url={youtube_link} />
           </div>
           <div className="col-lg-7">
             <div className="row">

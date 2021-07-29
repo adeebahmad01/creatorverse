@@ -41,7 +41,7 @@ const FunctionsContextProvider = ({ children }) => {
         { name: "tiktok", type: { name: `url` } },
         { name: "youtube_link", type: { name: `url` } },
         { name: "nft_id" },
-        { name: "bio", multiline, rows, maxlength: 500 },
+        { name: "bio", extras: { multiline, rows, maxlength: 500 } },
         { name: "fractions_total_supply", type: { name: `number` } },
         { name: "fraction_sold_presale", type: { name: `number`, unit: "$" } },
         {
@@ -78,7 +78,7 @@ const FunctionsContextProvider = ({ children }) => {
       selects: [{ name: "creators", options: creators }],
       inputs: [
         { name: "name" },
-        { name: "description", multiline, rows, maxlength: 500 },
+        { name: "description", extras: { multiline, rows, maxlength: 500 } },
         { name: "price", type: { name: `number` } },
       ],
       images: [{ name: "image" }],
@@ -89,6 +89,15 @@ const FunctionsContextProvider = ({ children }) => {
         { name: "total_fractions", type: { name: `number` } },
         { name: "price", type: { name: `number`, unit: "$" } },
         { name: "fractions_sold", type: { name: `number` } },
+        {
+          name: "end_time",
+          type: { name: `datetime-local` },
+          extras: {
+            min: new Date()
+              .toISOString()
+              .slice(0, new Date().toISOString().indexOf("T") + 6),
+          },
+        },
       ],
       defaultFields: {
         buyers: [],
@@ -114,14 +123,13 @@ const FunctionsContextProvider = ({ children }) => {
           {el[1].placeholder.split("_").join(" ")}{" "}
         </label>
         <Input
-          {...el}
+          {...el[1].extras}
           ref={el[1].ref}
           required={required}
           id={el[1].placeholder}
           defaultValue={active[el[0]]}
           placeholder={el[1].placeholder.split("_").join(" ")}
           type={el[1]?.type?.name}
-          step=".01"
           InputProps={{
             endAdornment: (
               <InputAdornment
@@ -131,7 +139,9 @@ const FunctionsContextProvider = ({ children }) => {
                 {el[1]?.type?.unit}
               </InputAdornment>
             ),
+            ...el[1].extras,
           }}
+          inputProps={{ ...el[1].extras }}
         />
       </div>
     ));

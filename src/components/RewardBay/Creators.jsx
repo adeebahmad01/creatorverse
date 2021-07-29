@@ -6,7 +6,7 @@ const Creators = ({ setActive, active }) => {
   const { activeUser, creators = [] } = useData();
   const showSlides = () =>
     activeUser.creators_subscribed.map((el, i) => {
-      const creator = creators.find((c) => c.id === el.creatorId);
+      const creator = creators.find((c) => c.id === el.creatorId) || {};
       return (
         <div key={el.creatorId} onClick={() => setActive(i)}>
           <div

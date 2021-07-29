@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 const RadeemRewards = () => {
   const { id } = useParams();
   const { rewards } = useData();
-  const [reward, setReward] = React.useState(null);
+  const [reward, setReward] = React.useState({});
   React.useEffect(() => {
     if (id) {
       setReward(rewards.find((r) => r.id === id));
@@ -16,7 +16,7 @@ const RadeemRewards = () => {
   return (
     <div className="py-5">
       <RewardCard {...reward} i={1} export />
-      <Redeem {...reward} />
+      <Redeem reward={reward} />
     </div>
   );
 };

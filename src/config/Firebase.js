@@ -6,12 +6,12 @@ import "firebase/firestore";
 import "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCUHiRQ1Iemg2uF2K8fIcBpepFlixNnYzQ",
-  authDomain: "creatorverse1.firebaseapp.com",
-  projectId: "creatorverse1",
-  storageBucket: "creatorverse1.appspot.com",
-  messagingSenderId: "660904678076",
-  appId: "1:660904678076:web:bc7f8c0f14de147f9cf6b9",
+  apiKey: "AIzaSyDauxtaZ6RuFfxwL5Jp0jC_a72IH7rkuA4",
+  authDomain: "creatorverse-246b9.firebaseapp.com",
+  projectId: "creatorverse-246b9",
+  storageBucket: "creatorverse-246b9.appspot.com",
+  messagingSenderId: "721200622977",
+  appId: "1:721200622977:web:a72a1ca0ae1b7975ab4c80",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

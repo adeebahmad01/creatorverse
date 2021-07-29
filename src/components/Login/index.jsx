@@ -39,7 +39,7 @@ const Login = () => {
     <div className="centered py-5">
       <Paper className="form bg-white shadow-lg pt-3 pb-5">
         <Typography variant="h3" className="h1 mt-2 mb-4">
-          Welcome Back !
+          
         </Typography>
         {/* <Button
           color="secondary"
@@ -87,10 +87,7 @@ const Login = () => {
                 Login
               </Button>
             </Box>
-            Don’t have an account?{" "}
-            <Link to="/signup" className="text-primary text-decoration-none">
-              Sign Up
-            </Link>
+            
           </Box>
         </form>
       </Paper>

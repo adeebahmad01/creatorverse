@@ -2,12 +2,12 @@ import React from "react";
 import HoverableTableRow from "./../utils/Popover";
 import { useData } from "../../context/DataContext";
 
-const CreatorsTable = () => {
+const CreatorsTable = ({ state }) => {
   const { activeUser } = useData();
   return (
     <div>
       <div className="container">
-        <table class="table table-striped">
+        <table className="table table-striped">
           <thead>
             <tr align="center" className="active">
               <th>Creator</th>
@@ -20,7 +20,7 @@ const CreatorsTable = () => {
           </thead>
           <tbody>
             {activeUser.creators_subscribed.map((el, i) => (
-              <HoverableTableRow {...el} i={i} />
+              <HoverableTableRow {...el} state={state} i={i} />
             ))}
           </tbody>
         </table>
