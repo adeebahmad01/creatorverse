@@ -74,9 +74,10 @@ const PresaleSale = ({ presale }) => {
     const myInterval = setInterval(updateTime, 1000);
     return () => clearInterval(myInterval);
   }, [presale.end_time]);
-  const activePresale = activeUser.creators_subscribed.find((fractions) => {
-    return fractions.creatorId === presale.creators?.name;
-  });
+  const activePresale =
+    activeUser.creators_subscribed.find((fractions) => {
+      return fractions.creatorId === presale.creators?.name;
+    }) || {};
   return (
     <div className="py-5">
       <div className="container">
