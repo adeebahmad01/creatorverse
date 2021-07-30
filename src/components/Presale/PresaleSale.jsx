@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { TextField } from "@material-ui/core";
 import { db } from "../../config/Firebase";
-import { useData } from "./../../context/DataContext";
-import { useHandling } from "./../../context/HandleContext";
+import { useData } from "../../context/DataContext";
+import { useHandling } from "../../context/HandleContext";
 
 const PresaleSale = ({ presale }) => {
   const ref = useRef(null);
@@ -74,6 +74,9 @@ const PresaleSale = ({ presale }) => {
     const myInterval = setInterval(updateTime, 1000);
     return () => clearInterval(myInterval);
   }, [presale.end_time]);
+  const activePresale = activeUser.creators_subscribed.find((fractions) => {
+    return fractions.creatorId === presale.creators?.name;
+  });
   return (
     <div className="py-5">
       <div className="container">
@@ -122,7 +125,7 @@ const PresaleSale = ({ presale }) => {
           <div className="col-lg-4">
             <h6>Fractions You Own</h6>
             <h1 className="active fw-bold">
-              {(+activeUser.fractions_owned)?.toLocaleString()}
+              {(+activePresale.fractions_owned)?.toLocaleString()}
             </h1>
           </div>
           <div className="col-lg-5">

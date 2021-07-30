@@ -14,7 +14,7 @@ const SuggestReward = ({ active = 0, portfolio }) => {
           creator.id === activeUser.creators_subscribed[active]?.creatorId
       ) || {};
     setCreator(creator);
-  }, [activeUser.creators_subscribed[active].creatorId]);
+  }, [activeUser.creators_subscribed[active]?.creatorId]);
   // set rewards by creator
   React.useEffect(() => {
     setRewards(
