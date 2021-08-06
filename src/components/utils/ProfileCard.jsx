@@ -1,10 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useData } from "../../context/DataContext";
 
 const ProfileCard = ({ profile_image, name, id }) => {
+  const { presales } = useData();
+  const presale =
+    presales.find((presale) => presale.creators?.name === id) || {};
+
   return (
-    <div className="col-lg-2 col-md-3 col-sm-4 col-6 px-4">
-      <Link to={`/profile/${id}`}>
+    <div className="col-lg-2 col-md-3 col-sm-4 col-6">
+      <Link
+        to={`/${
+          // if presale's end_time is past then return postsale else presale
+          new Date(presale.end_time).getTime() < Date.now() && presale?.id
+            ? "postsale"
+            : "presale"
+        }${presale?.id ? "/" + presale?.id : ""}`}
+      >
         <img
           src={profile_image?.[0]?.src}
           alt={name}

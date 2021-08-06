@@ -30,6 +30,7 @@
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
     "styled-components": "^5.3.0",
+    "truffle-test-helpers": "^0.2.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

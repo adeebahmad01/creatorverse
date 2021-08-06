@@ -6,9 +6,9 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract RFT is ERC20 {
 
-    uint public icoSharePrice;
-    uint public icoShareSupply;
-    uint public icoEnd;
+    uint public saleSharePrice;
+    uint public saleShareSupply;
+    uint public saleEnd;
 
     uint public nftId;
     IERC721 public nft;
@@ -21,37 +21,37 @@ contract RFT is ERC20 {
         string memory _symbol,
         address _nftAddress,
         uint _nftId,
-        uint _icoSharePrice,
-        uint _icoShareSupply,
+        uint _saleSharePrice,
+        uint _saleShareSupply,
         address _daiAddress
     )
     ERC20(_name, _symbol){
         nftId = _nftId;
         nft = IERC721(_nftAddress);
-        icoSharePrice = _icoSharePrice;
-        icoShareSupply = _icoShareSupply;
+        saleSharePrice = _saleSharePrice;
+        saleShareSupply = _saleShareSupply;
         dai = IERC20(_daiAddress);
         admin = msg.sender;
     }
 
-    function startIco() external {
+    function startSale() external {
         require(msg.sender == admin, "admin only");
         nft.transferFrom(msg.sender, address(this), nftId);
-        icoEnd = block.timestamp + 7 * 86400;
+        saleEnd = block.timestamp + 7 * 86400;
     }
 
     function buyShare(uint shareAmount) external {
         //Cant buy fractions until the Presale has started
-        require(icoEnd > 0, "ICO not started yet");
+        require(saleEnd > 0, "Sale not started yet");
 
         //Cant buy fractions from presale if timer has run out
-        require(block.timestamp <= icoEnd, "ICO is finished");
+        require(block.timestamp <= saleEnd, "Sale is finished");
 
         //Make sure there are fractions left to buy
-        require(totalSupply() + shareAmount <= icoShareSupply, "Not enough shares left");
+        require(totalSupply() + shareAmount <= saleShareSupply, "Not enough shares left");
         
         //Amount of purchase for fractions
-        uint daiAmount = shareAmount * icoSharePrice;
+        uint daiAmount = shareAmount * saleSharePrice;
 
         //Make the purchase
         dai.transferFrom(msg.sender, address(this), daiAmount);
@@ -60,7 +60,7 @@ contract RFT is ERC20 {
 
     function withdrawProfits() external {
         require(msg.sender == admin, "Admin only");
-        require(block.timestamp > icoEnd, "ICO not finished yet");
+        require(block.timestamp > saleEnd, "Sale not finished yet");
         uint daiBalance = dai.balanceOf(address(this));
         
         if(daiBalance > 0) {
@@ -68,7 +68,7 @@ contract RFT is ERC20 {
         }
 
         //Send leftover fractions to admin 
-        uint unsoldShareBalance = icoShareSupply - totalSupply();
+        uint unsoldShareBalance = saleShareSupply - totalSupply();
         if(unsoldShareBalance > 0) {
             _mint(admin, unsoldShareBalance);
         }

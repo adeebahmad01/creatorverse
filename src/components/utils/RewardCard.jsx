@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { useData } from "../../context/DataContext";
 
 const RewardCard = (reward) => {
-  const { activeUser } = useData();
+  const { activeUser = {} } = useData();
+  const personActive =
+    (activeUser?.creators_subscribed || []).find(
+      (el) => el.creatorId === reward?.creators?.name
+    ) || {};
   return (
     <div className="container py-3">
       <div className="row">
@@ -15,7 +19,7 @@ const RewardCard = (reward) => {
               alt={reward.name}
               className="w-100 objfit shadow-sm rounded-5"
             />
-            {!(activeUser.fractions_owned >= reward.price) ? (
+            {!((personActive.points_owned || 0) >= reward.price) ? (
               <div
                 className="progress mt-3 rounded-pill overflow-hidden"
                 style={{ height: "15px" }}
@@ -25,10 +29,10 @@ const RewardCard = (reward) => {
                   role="progressbar"
                   style={{
                     width: `${
-                      (activeUser.fractions_owned / reward.price) * 100
+                      ((personActive.points_owned || 0) / reward.price) * 100
                     }%`,
                   }}
-                  aria-valuenow={activeUser.fractions_owned}
+                  aria-valuenow={personActive.points_owned || 0}
                   aria-valuemin="0"
                   aria-valuemax={reward.price}
                 ></div>
@@ -43,7 +47,7 @@ const RewardCard = (reward) => {
         <div className="col-lg-9 d-flex justify-content-center align-items-center">
           <div className="px-4 w-100">
             <h3 className="mb-3">
-              {reward.name} ({reward.price} fractions){" "}
+              {reward.name} ({reward.price} points){" "}
             </h3>
             <div className="mb-2">{reward.description}</div>
             <div className="text-end">
@@ -72,23 +76,26 @@ const RewardCard = (reward) => {
                     </Link>
                   )}
                 </>
-              ) : (
-                activeUser.fractions_owned >= reward.price && (
-                  <>
-                    <Link
-                      to={"/redeem_rewards/" + reward.id}
-                      className="btn fw-bold btn-primary custom mx-2 px-5 rounded-pill"
-                    >
-                      Redeem
-                    </Link>
+              ) : personActive.points_owned || 0 >= reward.price ? (
+                <>
+                  <Link
+                    to={"/redeem_rewards/" + reward.id}
+                    className="btn fw-bold btn-primary custom mx-2 px-5 rounded-pill"
+                  >
+                    Redeem
+                  </Link>
 
-                    {!reward.redeem && (
-                      <button className="btn fw-bold btn-dark mx-2 px-5 rounded-pill">
-                        Sell
-                      </button>
-                    )}
-                  </>
-                )
+                  {!reward.redeem && (
+                    <Link
+                      to={"/export_rewards/" + reward.id}
+                      className="btn fw-bold text-white btn-dark mx-2 px-5 rounded-pill"
+                    >
+                      Export
+                    </Link>
+                  )}
+                </>
+              ) : (
+                ""
               )}
             </div>
           </div>

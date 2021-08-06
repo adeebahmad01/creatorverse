@@ -48,6 +48,10 @@ const Summary = () => {
   const ref = useRef(null);
   const ref2 = useRef(null);
   const { setError } = useHandling();
+  const activePresale =
+    activeUser.creators_subscribed.find((points) => {
+      return points.creatorId === presale.creators?.name;
+    }) || {};
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -55,23 +59,23 @@ const Summary = () => {
       if (+ref.current.value < 0) {
         throw new Error("Value Cannot be Negative");
       }
-      const fractions_sold = +presale.fractions_sold + +ref.current.value;
-      if (fractions_sold > presale.total_fractions) {
+      const points_sold = +presale.points_sold + +ref.current.value;
+      if (points_sold > presale.total_points) {
         throw new Error("Sale cannot be completed.");
       }
 
       // check if user id is already in activeUser.creators_subscribed = []
-      const presence = activeUser.creators_subscribed.findIndex((fractions) => {
-        return fractions.creatorId === presale.creators?.name;
+      const presence = activeUser.creators_subscribed.findIndex((points) => {
+        return points.creatorId === presale.creators?.name;
       });
       if (presence !== -1) {
-        activeUser.creators_subscribed[presence].fractions_owned +=
+        activeUser.creators_subscribed[presence].points_owned +=
           +ref.current.value;
       } else {
         activeUser.creators_subscribed.push({
           creatorId: presale.creators?.name,
           price: presale.price.split("$")[0],
-          fractions_owned: +ref.current.value,
+          points_owned: +ref.current.value,
           market_value: 0,
           day_gain: 0,
           gain: 0,
@@ -80,12 +84,11 @@ const Summary = () => {
 
       const investorData = {
         ...activeUser,
-        fractions_owned:
-          (+activeUser.fractions_owned || 0) + +ref.current.value,
+        points_owned: (+activeUser.points_owned || 0) + +ref.current.value,
       };
 
       batch.update(db.collection("presales").doc(presale.id), {
-        fractions_sold,
+        points_sold,
       });
       batch.set(db.collection("investors").doc(activeUser.id), investorData, {
         merge: true,
@@ -103,19 +106,19 @@ const Summary = () => {
       if (+ref2.current.value < 0) {
         throw new Error("Value Cannot be Negative");
       }
-      const fractions_owned =
-        (+activeUser.fractions_owned || 0) - +ref2.current.value;
-      const fractions_sold = +presale.fractions_sold - +ref2.current.value;
-      if (fractions_owned < 0) {
+      const points_owned =
+        (+activeUser.points_owned || 0) - +ref2.current.value;
+      const points_sold = +presale.points_sold - +ref2.current.value;
+      if (points_owned < 0) {
         throw new Error("Sale cannot be completed.");
       }
 
       // check if user id is already in activeUser.creators_subscribed = []
-      const presence = activeUser.creators_subscribed.findIndex((fractions) => {
-        return fractions.creatorId === presale.creators?.name;
+      const presence = activeUser.creators_subscribed.findIndex((points) => {
+        return points.creatorId === presale.creators?.name;
       });
       if (presence !== -1) {
-        activeUser.creators_subscribed[presence].fractions_owned -=
+        activeUser.creators_subscribed[presence].points_owned -=
           +ref2.current.value;
       } else {
         throw new Error("Sale Doesn.t exist.");
@@ -123,11 +126,11 @@ const Summary = () => {
 
       const investorData = {
         ...activeUser,
-        fractions_owned,
+        points_owned,
       };
 
       batch.update(db.collection("presales").doc(presale.id), {
-        fractions_sold,
+        points_sold,
       });
       batch.set(db.collection("investors").doc(activeUser.id), investorData, {
         merge: true,
@@ -193,21 +196,19 @@ const Summary = () => {
         </div>
         <div className="row mt-4">
           <div className="col-lg-4">
-            <h6>Fractions You Own</h6>
+            <h6>Points You Own</h6>
             <h1 className="active fw-bold">
-              {(
-                +presale.total_fractions - +presale.fractions_sold
-              ).toLocaleString()}
+              {(+activePresale.points_owned || 0)?.toLocaleString()}
             </h1>
           </div>
           <div className="col-lg-5">
-            <h6>Buy Fractions</h6>
+            <h6>Buy Points</h6>
             <form onSubmit={handleSubmit} className="d-flex">
               <TextField
                 type="text"
                 variant="standard"
                 inputRef={ref}
-                placeholder="# of fractions"
+                placeholder="# of points"
                 inputProps={{ className: `px-3 py-2` }}
                 className="form-control overflow-hidden border rounded-pill"
               />
@@ -220,7 +221,7 @@ const Summary = () => {
         <div className="row mt-2">
           <div className="col-lg-4"></div>
           <div className="col-lg-8">
-            <h6>Sell Fractions</h6>
+            <h6>Sell points</h6>
             <form onSubmit={handleSubmit2} className="d-flex">
               <select
                 type="text"

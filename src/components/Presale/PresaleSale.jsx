@@ -17,23 +17,23 @@ const PresaleSale = ({ presale }) => {
       if (+ref.current.value < 0) {
         throw new Error("Value Cannot be Negative");
       }
-      const fractions_sold = +presale.fractions_sold + +ref.current.value;
-      if (fractions_sold > presale.total_fractions) {
+      const points_sold = +presale.points_sold + +ref.current.value;
+      if (points_sold > presale.total_points) {
         throw new Error("Sale cannot be completed.");
       }
 
       // check if user id is already in activeUser.creators_subscribed = []
-      const presence = activeUser.creators_subscribed.findIndex((fractions) => {
-        return fractions.creatorId === presale.creators?.name;
+      const presence = activeUser.creators_subscribed.findIndex((points) => {
+        return points.creatorId === presale.creators?.name;
       });
       if (presence !== -1) {
-        activeUser.creators_subscribed[presence].fractions_owned +=
+        activeUser.creators_subscribed[presence].points_owned +=
           +ref.current.value;
       } else {
         activeUser.creators_subscribed.push({
           creatorId: presale.creators?.name,
           price: presale.price.split("$")[0],
-          fractions_owned: +ref.current.value,
+          points_owned: +ref.current.value,
           market_value: 0,
           day_gain: 0,
           gain: 0,
@@ -42,12 +42,11 @@ const PresaleSale = ({ presale }) => {
 
       const investorData = {
         ...activeUser,
-        fractions_owned:
-          (+activeUser.fractions_owned || 0) + +ref.current.value,
+        points_owned: (+activeUser.points_owned || 0) + +ref.current.value,
       };
 
       batch.update(db.collection("presales").doc(presale.id), {
-        fractions_sold,
+        points_sold,
       });
       batch.set(db.collection("investors").doc(activeUser.id), investorData, {
         merge: true,
@@ -75,8 +74,8 @@ const PresaleSale = ({ presale }) => {
     return () => clearInterval(myInterval);
   }, [presale.end_time]);
   const activePresale =
-    activeUser.creators_subscribed.find((fractions) => {
-      return fractions.creatorId === presale.creators?.name;
+    activeUser.creators_subscribed.find((points) => {
+      return points.creatorId === presale.creators?.name;
     }) || {};
   return (
     <div className="py-5">
@@ -103,8 +102,8 @@ const PresaleSale = ({ presale }) => {
           <div className="col-lg-5">
             <h6>Unit Sold</h6>
             <h1 className="active fw-bold">
-              {(+presale.fractions_sold)?.toLocaleString()}/
-              {(+presale.total_fractions)?.toLocaleString()}
+              {(+presale.points_sold)?.toLocaleString()}/
+              {(+presale.total_points)?.toLocaleString()}
             </h1>
             <div className="progress rounded-pill" style={{ height: "20px" }}>
               <div
@@ -112,31 +111,31 @@ const PresaleSale = ({ presale }) => {
                 role="progressbar"
                 style={{
                   width: `${
-                    (presale.fractions_sold / presale.total_fractions) * 100
+                    (presale.points_sold / presale.total_points) * 100
                   }%`,
                 }}
-                aria-valuenow={presale.fractions_sold}
+                aria-valuenow={presale.points_sold}
                 aria-valuemin="0"
-                aria-valuemax={presale.total_fractions}
+                aria-valuemax={presale.total_points}
               ></div>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-4">
-            <h6>Fractions You Own</h6>
+            <h6>Points You Own</h6>
             <h1 className="active fw-bold">
-              {(+activePresale.fractions_owned)?.toLocaleString()}
+              {(+activePresale.points_owned || 0)?.toLocaleString()}
             </h1>
           </div>
           <div className="col-lg-5">
-            <h6>Buy Fractions</h6>
+            <h6>Buy Points</h6>
             <form onSubmit={handleSubmit} className="d-flex">
               <TextField
                 type="text"
                 inputRef={ref}
                 variant="standard"
-                placeholder="# of fractions"
+                placeholder="# of points"
                 inputProps={{ className: `p-3` }}
                 className="form-control overflow-hidden border rounded-pill"
               />

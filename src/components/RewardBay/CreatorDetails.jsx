@@ -56,7 +56,7 @@ const CreatorDetails = ({ active }) => {
               <h3 className="active">
                 $
                 {(
-                  personActive.fractions_owned * personActive.price || 0
+                  personActive.points_owned * personActive.price || 0
                 ).toLocaleString()}
               </h3>
               <span>
@@ -70,8 +70,8 @@ const CreatorDetails = ({ active }) => {
         </div>
         <div className="row">
           <div className="col-lg-4">
-            <h5>Fractions You Own</h5>
-            <h1 className="active fw-bold"> {personActive.fractions_owned} </h1>
+            <h5>Points You Own</h5>
+            <h1 className="active fw-bold"> {personActive.points_owned} </h1>
           </div>
           <div className="col-lg-8">
             <ReactApexCharts

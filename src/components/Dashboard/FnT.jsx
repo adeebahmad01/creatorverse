@@ -36,10 +36,10 @@ const useRowStyles = makeStyles({
     },
   },
 });
-const Row = ({ data, setImages, row, i }) => {
+const Row = ({ setImages, row, i }) => {
   // Controlling Accordion
   const [open, setOpen] = useState(false);
-  const { getPages } = useData();
+  const data = useData();
   const { page, input, component } = useParams();
   const { allInputs } = useFunctions();
   // Material UI classes
@@ -76,10 +76,13 @@ const Row = ({ data, setImages, row, i }) => {
             className="text-capitalize"
             key={i}
           >
-            {row[el.name]?.name}
-            {row?.[el.name]?.unit && (
-              <span className="text-capitalize">({row?.[el.name]?.unit})</span>
-            )}
+            {console.log(data?.[el?.params?.for])}
+            {el?.params?.isId
+              ? data?.[el?.params?.for].find((element) => {
+                  console.log(element.id === row[el.name]?.name);
+                  return element.id === row[el.name]?.name;
+                }).name
+              : row[el.name]?.name}
           </TableCell>
         ))}
         {active?.images?.map((el, i) => (
@@ -106,13 +109,6 @@ const Row = ({ data, setImages, row, i }) => {
               onClick={async () => {
                 if (input) {
                   await db.collection(input).doc(row.id).delete();
-                } else if (page) {
-                  await getPages(page).collection("data").doc(row.id).delete();
-                } else if (component) {
-                  await db
-                    .collection("about")
-                    .doc(`${component}:${component}`)
-                    .delete();
                 }
                 if (active.images) {
                   active.images.forEach((el) => {

@@ -6,7 +6,7 @@ export default function HoverableTableRow({
   market_value,
   day_gain,
   gain,
-  fractions_owned,
+  points_owned,
   price,
   state,
   i,
@@ -41,8 +41,8 @@ export default function HoverableTableRow({
         </div>
         {creator.name}
       </td>
-      <td>{fractions_owned}</td>
-      <td>{(fractions_owned * price).toLocaleString()}</td>
+      <td>{points_owned}</td>
+      <td>{(points_owned * price).toLocaleString()}</td>
       <td>{(market_value || 0).toFixed(2)}</td>
       <td>{(day_gain || 0).toFixed(2)}</td>
       <td>{(gain || 0).toFixed(2)}</td>

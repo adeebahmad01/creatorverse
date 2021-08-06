@@ -42,7 +42,7 @@ const FunctionsContextProvider = ({ children }) => {
         { name: "youtube_link", type: { name: `url` } },
         { name: "nft_id" },
         { name: "bio", extras: { multiline, rows, maxlength: 500 } },
-        { name: "fractions_total_supply", type: { name: `number` } },
+        { name: "points_total_supply", type: { name: `number` } },
         { name: "fraction_sold_presale", type: { name: `number`, unit: "$" } },
         {
           name: "fraction_amount_postsale",
@@ -66,7 +66,7 @@ const FunctionsContextProvider = ({ children }) => {
         { name: "name" },
         { name: "email", type: { name: `email` } },
         { name: "wallet_address" },
-        { name: "fractions_owned", type: { name: `number` } },
+        { name: "points_owned", type: { name: `number` } },
       ],
       images: [{ name: "profile_image" }],
       defaultFields: {
@@ -75,7 +75,16 @@ const FunctionsContextProvider = ({ children }) => {
       },
     },
     rewards: {
-      selects: [{ name: "creators", options: creators }],
+      selects: [
+        {
+          name: "creators",
+          options: creators,
+          params: {
+            isId: true,
+            for: "creators",
+          },
+        },
+      ],
       inputs: [
         { name: "name" },
         { name: "description", extras: { multiline, rows, maxlength: 500 } },
@@ -84,11 +93,20 @@ const FunctionsContextProvider = ({ children }) => {
       images: [{ name: "image" }],
     },
     presales: {
-      selects: [{ name: "creators", options: creators }],
+      selects: [
+        {
+          name: "creators",
+          options: creators,
+          params: {
+            isId: true,
+            for: "creators",
+          },
+        },
+      ],
       inputs: [
-        { name: "total_fractions", type: { name: `number` } },
+        { name: "total_points", type: { name: `number` } },
         { name: "price", type: { name: `number`, unit: "$" } },
-        { name: "fractions_sold", type: { name: `number` } },
+        { name: "points_sold", type: { name: `number` } },
         {
           name: "end_time",
           type: { name: `datetime-local` },

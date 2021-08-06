@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Divider from "@material-ui/core/Divider";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { TextField } from "@material-ui/core";
 
 const Export = () => {
+  const [price, setPrice] = useState(0);
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    // fetch current price of bitcoin in usd
+    fetch("https://api.coinbase.com/v2/prices/ETH-USD/spot")
+      .then((response) => response.json())
+      .then((data) => {
+        setPrice(+data.data.amount);
+      });
+  }, []);
   return (
     <div className="py-5">
       <div className="container">
@@ -21,39 +31,34 @@ const Export = () => {
           </div>
         </div>
         <div className="row pt-5">
-          <div className="col-lg-5">
-            <h6>Quantity</h6>
-            <div className="d-flex">
-              <TextField
-                type="text"
-                variant="standard"
-                placeholder="# of fractions"
-                inputProps={{ className: `px-3 py-2` }}
-                className="form-control overflow-hidden border rounded-pill"
-              />
-            </div>
-          </div>
           <div className="col-lg-7">
             <h6>Price Per Item</h6>
             <div className="d-flex flex-nowrap input-group">
               <select
                 type="text"
-                placeholder="# of fractions"
                 className="form-select w-auto px-4 py-1"
                 style={{ backgroundColor: `#ccc` }}
-                value=""
+                defaultValue=""
               >
                 <option value="" disabled>
-                  ETH
+                  Select
                 </option>
+                <option value="ETH">ETH ({price}$)</option>
               </select>
               <TextField
                 type="text"
                 variant="standard"
-                placeholder="# of fractions"
+                placeholder="# of points"
+                onChange={(e) => {
+                  const totalPrice = +e.target.value * +price;
+                  const openSeasFee = +totalPrice * 0.0025;
+                  const revenueFee = +totalPrice * 0.01;
+                  const total = +totalPrice - openSeasFee - revenueFee;
+                  setTotal(total);
+                }}
                 inputProps={{ className: `px-3 py-2` }}
-                defaultValue="35"
-                className="form-control overflow-hidden border w-75"
+                style={{ width: `60%` }}
+                className="form-control overflow-hidden border"
               />
             </div>
           </div>
@@ -70,7 +75,7 @@ const Export = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <div>Open Seas Fee</div>
                 <Divider className="w-50 active_bg" />
-                <span>22.50$</span>
+                <span>2.50%</span>
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <div>Revenue Fee</div>
@@ -85,10 +90,20 @@ const Export = () => {
               <Divider className="w-50 active_bg" />
               <span>
                 <SiEthereum />
-                10 ETH
               </span>
             </div>
-            <h1 className="text-end active mb-4">80,124$</h1>
+            <h1 className="text-end active mb-4">{total.toLocaleString()}$</h1>
+          </div>
+          <div className="col-12 py-3">
+            <h2>Disclaimer</h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut,
+              fugiat harum. Maxime dolorum aliquid ratione. Dolore consequatur
+              eveniet cumque, nam exercitationem earum vel culpa asperiores
+              deserunt fuga quos, dignissimos eum?
+            </p>
+          </div>
+          <div className="col-12">
             <div className="text-end">
               <button className="btn fw-bold btn-dark mx-2 px-5 rounded-pill">
                 Export

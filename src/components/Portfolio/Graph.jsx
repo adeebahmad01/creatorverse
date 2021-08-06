@@ -38,13 +38,13 @@ const Graph = () => {
       },
     },
   });
-  // multiply all prices: number and fractions_owned: number owned in activeUser.creators_subscribed = [] by reduce method
+  // multiply all prices: number and points_owned: number owned in activeUser.creators_subscribed = [] by reduce method
   const total = activeUser.creators_subscribed.reduce((acc, curr) => {
     const price = curr.price;
-    const fractions_owned = curr.fractions_owned;
-    console.log({ price, fractions_owned });
-    const price_fractions_owned = price * fractions_owned;
-    return acc + price_fractions_owned;
+    const points_owned = curr.points_owned;
+    console.log({ price, points_owned });
+    const price_points_owned = price * points_owned;
+    return acc + price_points_owned;
   }, 0);
   console.log(total);
   return (
