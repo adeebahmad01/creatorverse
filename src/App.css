@@ -18,6 +18,14 @@
   background-color: var(--primary) !important;
 }
 
+#presale_page {
+  --primary: #c44d16;
+}
+
+#presale_page .btn {
+  --primary: #00689f;
+}
+
 .view-all {
   right: 0;
   top: 50%;

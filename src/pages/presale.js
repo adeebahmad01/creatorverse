@@ -40,7 +40,7 @@ const Presale = () => {
     }
   }, [presale, creator, rewardsAll]);
   return (
-    <div>
+    <div id="presale_page">
       <CreatorInfo creator={creator} presale={presale} />
       <Reward rewards={rewards} youtube_link={creator.youtube_link} />
       <PresaleSale presale={presale} />
