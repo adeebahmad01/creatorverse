@@ -60,13 +60,8 @@ const CreatorInfo = ({ creator, presale, isProfile = false }) => {
                 }${presale?.id ? "/" + presale?.id : ""}`}
                 className="btn text-white btn-primary me-3 px-5 py-2 rounded-pill"
               >
-                <span className="h6">
-                  Buy{" "}
-                  {new Date(presale.end_time).getTime() < Date.now() &&
-                  presale?.id
-                    ? "postsale"
-                    : "presale"}
-                </span>
+                <span className="h6 me-2">Buy</span>
+                <BsArrowRight style={{ width: "1.5rem", height: "1.5rem" }} />
               </Link>
             )}
           </div>

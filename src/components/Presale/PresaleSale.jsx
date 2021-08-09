@@ -83,7 +83,7 @@ const PresaleSale = ({ presale }) => {
         <div className="row mb-3">
           <div className="col-lg">
             <h6>Sale Ends In</h6>
-            <h1 className="active fw-bold">
+            <h1 style={{ "--primary": "#c44d16" }} className="active fw-bold">
               {times
                 .map((el) =>
                   timeLeft[el] > 9
@@ -93,6 +93,11 @@ const PresaleSale = ({ presale }) => {
                     : "00"
                 )
                 .join(":")}
+              <img
+                src="https://forum.bubble.io/uploads/default/original/3X/b/c/bcaa47ad6c458b27fdda1af74a286cbd6117f7c7.gif"
+                alt="Loader"
+                width={60}
+              />
             </h1>
           </div>
           <div className="col-lg">
