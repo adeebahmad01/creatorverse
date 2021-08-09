@@ -82,17 +82,25 @@ const CreatorDetails = ({ active }) => {
             />
             <div className="text-end">
               <Link
-                to={"/postsale/" + presale.id}
+                to={`/${
+                  // if presale's end_time is past then return postsale else presale
+                  new Date(presale.end_time).getTime() < Date.now() &&
+                  presale?.id
+                    ? "postsale"
+                    : "presale"
+                }${presale?.id ? "/" + presale?.id : ""}`}
                 className="btn text-white btn-primary me-3 px-5 py-2 rounded-pill"
               >
                 <span className="h6">Buy</span>
               </Link>
-              <Link
-                to={"/postsale/" + presale.id}
-                className="btn text-white btn-dark px-5 py-2 rounded-pill"
-              >
-                <span className="h6">Sell</span>
-              </Link>
+              {new Date(presale.end_time).getTime() < Date.now() && (
+                <Link
+                  to={"/postsale/" + presale.id}
+                  className="btn text-white btn-dark px-5 py-2 rounded-pill"
+                >
+                  <span className="h6">Sell</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>

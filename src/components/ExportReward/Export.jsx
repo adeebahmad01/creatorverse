@@ -7,6 +7,10 @@ import { TextField } from "@material-ui/core";
 const Export = () => {
   const [price, setPrice] = useState(0);
   const [total, setTotal] = useState(0);
+  const [fees, setFees] = useState({
+    openSeasFee: 0,
+    platformFee: 0,
+  });
   useEffect(() => {
     // fetch current price of bitcoin in usd
     fetch("https://api.coinbase.com/v2/prices/ETH-USD/spot")
@@ -38,7 +42,7 @@ const Export = () => {
                 type="text"
                 className="form-select w-auto px-4 py-1"
                 style={{ backgroundColor: `#ccc` }}
-                defaultValue=""
+                defaultValue="ETH"
               >
                 <option value="" disabled>
                   Select
@@ -48,12 +52,16 @@ const Export = () => {
               <TextField
                 type="text"
                 variant="standard"
-                placeholder="# of points"
+                placeholder="Coins"
                 onChange={(e) => {
                   const totalPrice = +e.target.value * +price;
-                  const openSeasFee = +totalPrice * 0.0025;
-                  const revenueFee = +totalPrice * 0.01;
-                  const total = +totalPrice - openSeasFee - revenueFee;
+                  const openSeasFee = +totalPrice * 0.025;
+                  const platformFee = +totalPrice * 0.1;
+                  setFees({
+                    openSeasFee,
+                    platformFee,
+                  });
+                  const total = +totalPrice - openSeasFee - platformFee;
                   setTotal(total);
                 }}
                 inputProps={{ className: `px-3 py-2` }}
@@ -73,14 +81,14 @@ const Export = () => {
             </h5>
             <div className="active">
               <div className="d-flex justify-content-between align-items-center">
-                <div>Open Seas Fee</div>
+                <div>Openseas Fee</div>
                 <Divider className="w-50 active_bg" />
-                <span>2.50%</span>
+                <span>2.50%({fees.openSeasFee.toFixed(2)}$)</span>
               </div>
               <div className="d-flex justify-content-between align-items-center">
-                <div>Revenue Fee</div>
+                <div>Platform Fee</div>
                 <Divider className="w-50 active_bg" />
-                <span>10%</span>
+                <span>10%({fees.platformFee.toFixed(2)}$)</span>
               </div>
             </div>
           </div>
@@ -92,7 +100,9 @@ const Export = () => {
                 <SiEthereum />
               </span>
             </div>
-            <h1 className="text-end active mb-4">{total.toLocaleString()}$</h1>
+            <h1 className="text-end active mb-4">
+              {(+total.toFixed(2)).toLocaleString()}$
+            </h1>
           </div>
           <div className="col-12 py-3">
             <h2>Disclaimer</h2>

@@ -22,13 +22,14 @@ const Profile = () => {
   useEffect(() => {
     if (creator.id) {
       const presale = presales.find(
-        (presale) => presale.creator?.name === creator.id
+        (presale) => presale.creators?.name === creator.id
       );
       if (presale) {
         setPrsale(presale);
       }
     }
   }, [creator, presales]);
+  console.log(presale);
   return (
     <div>
       <CreatorInfo isProfile creator={creator} presale={presale} />

@@ -20,22 +20,31 @@ const RewardCard = (reward) => {
               className="w-100 objfit shadow-sm rounded-5"
             />
             {!((personActive.points_owned || 0) >= reward.price) ? (
-              <div
-                className="progress mt-3 rounded-pill overflow-hidden"
-                style={{ height: "15px" }}
-              >
+              <div className="d-flex justify-content-center align-items-center mt-3">
                 <div
-                  className="progress-bar rounded-pill custom"
-                  role="progressbar"
-                  style={{
-                    width: `${
-                      ((personActive.points_owned || 0) / reward.price) * 100
-                    }%`,
-                  }}
-                  aria-valuenow={personActive.points_owned || 0}
-                  aria-valuemin="0"
-                  aria-valuemax={reward.price}
-                ></div>
+                  className="progress w-100 rounded-pill overflow-hidden"
+                  style={{ height: "15px" }}
+                >
+                  <div
+                    className="progress-bar rounded-pill custom"
+                    role="progressbar"
+                    style={{
+                      width: `${
+                        ((personActive.points_owned || 0) / reward.price) * 100
+                      }%`,
+                    }}
+                    aria-valuenow={personActive.points_owned || 0}
+                    aria-valuemin="0"
+                    aria-valuemax={reward.price}
+                  ></div>
+                </div>
+                <div className="ms-2">
+                  {(
+                    ((personActive.points_owned || 0) / reward.price) *
+                    100
+                  ).toFixed(1)}
+                  %
+                </div>
               </div>
             ) : (
               <div className="tick">
@@ -76,7 +85,7 @@ const RewardCard = (reward) => {
                     </Link>
                   )}
                 </>
-              ) : personActive.points_owned || 0 >= reward.price ? (
+              ) : (personActive.points_owned || 0) >= reward.price ? (
                 <>
                   <Link
                     to={"/redeem_rewards/" + reward.id}
