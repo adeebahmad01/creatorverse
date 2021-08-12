@@ -26,6 +26,7 @@ import Login from "./components/Login/index";
 import HandleContextProvider from "./context/HandleContext";
 import Add from "./components/Dashboard/Add";
 import FnT from "./components/Dashboard/FnT";
+import PresalesActive from "./components/Dashboard/PresalesActive";
 const PrivateRoutes = ({ component: Comp, ...rest }) => {
   const { isAuth } = useAuth();
   return (
@@ -96,6 +97,11 @@ function App() {
                   component={Login}
                 />
                 <PrivateRoutes exact path="/dashboard" component={Dashboard} />
+                <PrivateRoutes
+                  exact
+                  path="/dashboard/activePresales"
+                  component={PresalesActive}
+                />
                 <PrivateRoutes
                   exact
                   path="/panel/:input/create"

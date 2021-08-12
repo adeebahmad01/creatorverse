@@ -53,7 +53,8 @@ const CreatorInfo = ({ creator, presale, isProfile = false }) => {
               <Link
                 to={`/${
                   // if presale's end_time is past then return postsale else presale
-                  new Date(presale.end_time).getTime() < Date.now() &&
+                  (new Date(presale.end_time).getTime() < Date.now() ||
+                    presale.isPostsale) &&
                   presale?.id
                     ? "postsale"
                     : "presale"

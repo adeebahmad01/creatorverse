@@ -68,6 +68,25 @@ const Dashboard = () => {
                   </TableRow>
                 );
               })}
+              <TableRow>
+                <TableCell component="th"> {values.length + 1} </TableCell>
+                <TableCell className="text-capitalize">
+                  Active Presales
+                </TableCell>
+                <TableCell>
+                  <ButtonGroup className="btn-group">
+                    {/* Button to Delete the Exercise */}
+                    <Button
+                      variant="contained"
+                      component={Link}
+                      to="/dashboard/activePresales"
+                      color="primary"
+                    >
+                      <VisibilityIcon />
+                    </Button>
+                  </ButtonGroup>
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>

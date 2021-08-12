@@ -84,7 +84,8 @@ const CreatorDetails = ({ active }) => {
               <Link
                 to={`/${
                   // if presale's end_time is past then return postsale else presale
-                  new Date(presale.end_time).getTime() < Date.now() &&
+                  (new Date(presale.end_time).getTime() < Date.now() ||
+                    presale.isPostsale) &&
                   presale?.id
                     ? "postsale"
                     : "presale"
@@ -93,7 +94,8 @@ const CreatorDetails = ({ active }) => {
               >
                 <span className="h6">Buy</span>
               </Link>
-              {new Date(presale.end_time).getTime() < Date.now() && (
+              {(new Date(presale.end_time).getTime() < Date.now() ||
+                presale.isPostsale) && (
                 <Link
                   to={"/postsale/" + presale.id}
                   className="btn text-white btn-dark px-5 py-2 rounded-pill"
