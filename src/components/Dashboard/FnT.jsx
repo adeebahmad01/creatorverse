@@ -81,7 +81,7 @@ const Row = ({ setImages, row, i }) => {
               ? data?.[el?.params?.for].find((element) => {
                   console.log(element.id === row[el.name]?.name);
                   return element.id === row[el.name]?.name;
-                }).name
+                })?.name || "User Not Found"
               : row[el.name]?.name}
           </TableCell>
         ))}
