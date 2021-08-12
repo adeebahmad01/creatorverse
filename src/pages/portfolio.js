@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import Graph from "../components/Portfolio/Graph";
 import UserName from "./../components/RewardBay/UserName";
 import CreatorsTable from "./../components/Portfolio/CreatorsTable";
-import SuggestReward from "../components/RewardBay/SuggestReward";
 import CreatorDetails from "../components/RewardBay/CreatorDetails";
 
 const Portfolio = () => {
   const state = useState(null);
-  console.log(state);
   return (
     <div>
       <UserName />
