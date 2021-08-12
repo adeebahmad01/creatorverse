@@ -99,6 +99,9 @@ const Summary = () => {
       setError(err);
     }
   };
+  const personActive = activeUser.creators_subscribed.find((points) => {
+    return points.creatorId === presale.creators?.name;
+  });
   const handleSubmit2 = async (event) => {
     event.preventDefault();
     try {
@@ -185,6 +188,20 @@ const Summary = () => {
               <a href="#top" className="mx-3 tab_btn">
                 Peer Comparison
               </a>
+            </div>
+            <div className="fw-bold pt-4">
+              <h3 className="active fw-bold">
+                $
+                {(
+                  personActive.points_owned * personActive.price || 0
+                ).toLocaleString()}
+              </h3>
+              <div>
+                <span className="text-success">+2.21$(+4.56%)</span> Today
+              </div>
+              <div>
+                <span className="text-success">+2.21$(+4.56%)</span> After Hours
+              </div>
             </div>
             <ReactApexCharts
               options={state.options}
