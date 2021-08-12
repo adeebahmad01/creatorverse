@@ -45,11 +45,11 @@ const CreatorDetails = ({ active }) => {
     },
   });
   return (
-    <div>
+    <div className="py-4">
       <div className="container">
         <div className="row py-4">
           <div className="col-lg-4">
-            <h2>{creator.name}</h2>
+            <h2>{creator.name || "Creator Not Found"}</h2>
           </div>
           <div className="col-lg-8">
             <div className="d-flex fw-bold align-items-center justify-content-between">

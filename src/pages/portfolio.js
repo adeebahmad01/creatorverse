@@ -6,14 +6,13 @@ import SuggestReward from "../components/RewardBay/SuggestReward";
 import CreatorDetails from "../components/RewardBay/CreatorDetails";
 
 const Portfolio = () => {
-  const state = useState(0);
+  const state = useState(null);
+  console.log(state);
   return (
     <div>
       <UserName />
-      <Graph />
+      {state[0] !== null ? <CreatorDetails active={state[0]} /> : <Graph />}
       <CreatorsTable state={state} />
-      <CreatorDetails active={state[0]} />
-      <SuggestReward portfolio active={state[0]} />
     </div>
   );
 };

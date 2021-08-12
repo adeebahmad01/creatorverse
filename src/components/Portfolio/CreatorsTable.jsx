@@ -5,14 +5,14 @@ import { useData } from "../../context/DataContext";
 const CreatorsTable = ({ state }) => {
   const { activeUser } = useData();
   return (
-    <div>
+    <div className="py-4">
       <div className="container">
         <table className="table table-striped">
           <thead>
             <tr align="center" className="active">
               <th>Creator</th>
-              <th>Fraction</th>
-              <th>Cost($)</th>
+              <th>Points</th>
+              <th>Price Per Point($)</th>
               <th>Market Value($)</th>
               <th>Day Gain(%)</th>
               <th>Gain All time(%)</th>

@@ -12,6 +12,7 @@ export const SearchWrapper = styled.div`
 `;
 const SearchBar = () => {
   const { creators } = useData();
+  const [open, setOpen] = useState(false);
   return (
     <SearchWrapper className="py-5">
       <div className="container" style={{ maxWidth: 768 }}>
@@ -25,10 +26,11 @@ const SearchBar = () => {
                 <AiOutlineSearch width={20} />
               </div>
               <Autocomplete
-                id="custom-input-demo"
                 options={creators}
                 className="w-100 rounded-0"
                 getOptionLabel={(option) => option.name}
+                openOnFocus={false}
+                open={open}
                 renderOption={(e, option) => (
                   <Link {...e} to={`/profile/${option.id}`}>
                     {option.name}
@@ -40,6 +42,15 @@ const SearchBar = () => {
                       type="text"
                       placeholder="Search"
                       {...params.inputProps}
+                      onChange={(e) => {
+                        params.inputProps.onChange(e);
+                        if (e.target.value) setOpen(true);
+                        else setOpen(false);
+                      }}
+                      onBlur={(e) => {
+                        params.inputProps.onBlur(e);
+                        setOpen(false);
+                      }}
                       className="form-control border-0 shadow-none p-2"
                     />
                   </div>

@@ -2,7 +2,7 @@ import React from "react";
 import ReactPlayer from "react-player";
 const Reward = ({ youtube_link, rewards }) => {
   return (
-    <div>
+    <div className="my-3">
       <div className="container px-4 py-2 custom rounded-5">
         <div className="row">
           <div className="col-lg-5 d-flex justify-content-center align-items-center">

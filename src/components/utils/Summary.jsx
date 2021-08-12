@@ -142,7 +142,7 @@ const Summary = () => {
     }
   };
   return (
-    <div>
+    <div className="my-3 pt-4">
       <div className="container">
         <div className="row">
           <div className="col-lg-4 d-flex justify-content-center align-items-center">
@@ -167,22 +167,22 @@ const Summary = () => {
           </div>
           <div className="col-lg-8">
             <div className="tabs">
-              <a href="#top" className="mx-2 tab_btn active">
+              <a href="#top" className="mx-3 tab_btn active">
                 Summary
               </a>
-              <a href="#top" className="mx-2 tab_btn">
+              <a href="#top" className="mx-3 tab_btn">
                 News
               </a>
-              <a href="#top" className="mx-2 tab_btn">
+              <a href="#top" className="mx-3 tab_btn">
                 Fundamentals
               </a>
-              <a href="#top" className="mx-2 tab_btn">
+              <a href="#top" className="mx-3 tab_btn">
                 Calendar
               </a>
-              <a href="#top" className="mx-2 tab_btn">
+              <a href="#top" className="mx-3 tab_btn">
                 Analysis
               </a>
-              <a href="#top" className="mx-2 tab_btn">
+              <a href="#top" className="mx-3 tab_btn">
                 Peer Comparison
               </a>
             </div>
@@ -194,7 +194,8 @@ const Summary = () => {
             />
           </div>
         </div>
-        <div className="row mt-4">
+        <hr />
+        <div className="row pt-4">
           <div className="col-lg-4">
             <h6>Points You Own</h6>
             <h1 className="active fw-bold">
@@ -218,7 +219,7 @@ const Summary = () => {
             </form>
           </div>
         </div>
-        <div className="row mt-2">
+        <div className="row mt-3">
           <div className="col-lg-4"></div>
           <div className="col-lg-8">
             <h6>Sell points</h6>
