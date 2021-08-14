@@ -148,7 +148,7 @@ const Summary = () => {
     <div className="my-3 pt-4">
       <div className="container">
         <div className="row">
-          <div className="col-lg-4 d-flex justify-content-center align-items-center">
+          <div className="col-lg-4 d-flex justify-content-center flex-column align-items-center">
             <div className="rounded-5 custom w-100 p-3">
               <div className="d-flex text-white p-2 justify-content-between">
                 <span className="fw-bold">Days Range</span>
@@ -166,14 +166,14 @@ const Summary = () => {
                 <span className="fw-bold">Shares Outstanding</span>
                 <span>16.8B</span>
               </div>
-              <div className="d-flex text-white p-2 justify-content-between">
-                <span className="fw-bold">Price Per Point</span>
-                <span>{(personActive.price || 0).toLocaleString()}$</span>
-              </div>
-              <div className="d-flex text-white p-2 justify-content-between">
-                <span className="fw-bold">Points Owned</span>
-                <span>{(personActive.points_owned || 0).toLocaleString()}</span>
-              </div>
+            </div>
+            <div className="d-flex w-100 text-end flex-column p-2 justify-content-between">
+              <span className="fw-bold d-inline-block mb-3">
+                Price Per Point
+              </span>
+              <h1 className="active">
+                {(personActive.price || 0).toLocaleString()}$
+              </h1>
             </div>
           </div>
           <div className="col-lg-8">
