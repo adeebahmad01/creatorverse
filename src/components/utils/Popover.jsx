@@ -1,4 +1,3 @@
-import Popover from "@material-ui/core/Popover";
 import React, { useState, useEffect } from "react";
 import { useData } from "../../context/DataContext";
 export default function HoverableTableRow({
@@ -11,7 +10,7 @@ export default function HoverableTableRow({
   state,
   i,
 }) {
-  const { creators = [], presales } = useData();
+  const { creators = [] } = useData();
   const [, setActive] = state;
   const [creator, setCreator] = useState({});
   useEffect(() => {
@@ -19,9 +18,6 @@ export default function HoverableTableRow({
       setCreator(creators.find((creator) => creator.id === creatorId) || {});
     }
   }, [creatorId, creators]);
-  const presale = presales.find(
-    (presale) => presale.creators.name === creator.id
-  );
   return (
     <tr
       align="center"

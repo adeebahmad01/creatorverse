@@ -166,6 +166,14 @@ const Summary = () => {
                 <span className="fw-bold">Shares Outstanding</span>
                 <span>16.8B</span>
               </div>
+              <div className="d-flex text-white p-2 justify-content-between">
+                <span className="fw-bold">Price Per Point</span>
+                <span>{(personActive.price || 0).toLocaleString()}$</span>
+              </div>
+              <div className="d-flex text-white p-2 justify-content-between">
+                <span className="fw-bold">Points Owned</span>
+                <span>{(personActive.points_owned || 0).toLocaleString()}</span>
+              </div>
             </div>
           </div>
           <div className="col-lg-8">
