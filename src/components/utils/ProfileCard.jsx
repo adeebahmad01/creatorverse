@@ -17,6 +17,7 @@ const ProfileCard = ({ profile_image, name, id }) => {
         }
       } else if (new Date(presale.end_time).getTime() < Date.now())
         name = "postsale";
+      else name = "presale";
     } else {
       name = "presale";
     }

@@ -55,6 +55,7 @@ const CreatorDetails = ({ active }) => {
         }
       } else if (new Date(presale.end_time).getTime() < Date.now())
         name = "postsale";
+      else name = "presale";
     } else {
       name = "presale";
     }
@@ -76,6 +77,7 @@ const CreatorDetails = ({ active }) => {
       } else if (new Date(presale.end_time).getTime() < Date.now())
         button = btn;
     }
+    return button;
   };
   return (
     <div className="py-4">
