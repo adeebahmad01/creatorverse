@@ -201,14 +201,10 @@ const PresalesActive = () => {
     if (input)
       setActive(
         inputData.filter((presale) => {
-          console.log({
-            one: !(new Date(presale.end_time).getTime() > Date.now()),
-            two: !presale.isPostsale,
-          });
-          return (
-            new Date(presale.end_time).getTime() > Date.now() &&
-            !presale.isPostsale
-          );
+          if (typeof presale.isPostsale === "boolean")
+            return !presale.isPostsale;
+          if (new Date(presale.end_time).getTime() > Date.now()) return false;
+          return true;
         })
       );
     else if (component) setActive([componentData]);

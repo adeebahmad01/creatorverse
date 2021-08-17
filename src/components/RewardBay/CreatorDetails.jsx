@@ -44,6 +44,39 @@ const CreatorDetails = ({ active }) => {
       },
     },
   });
+  const renderUrl = () => {
+    let name;
+    if (presale.id) {
+      if (typeof presale.isPostsale === "boolean") {
+        if (presale.isPostsale) {
+          name = "postsale";
+        } else {
+          name = "presale";
+        }
+      } else if (new Date(presale.end_time).getTime() < Date.now())
+        name = "postsale";
+    } else {
+      name = "presale";
+    }
+    return `/${name}${presale?.id ? "/" + presale?.id : ""}`;
+  };
+  const renderButton = () => {
+    let button;
+    const btn = (
+      <Link
+        to={"/postsale/" + presale.id}
+        className="btn text-white btn-dark px-5 py-2 rounded-pill"
+      >
+        <span className="h6">Sell</span>
+      </Link>
+    );
+    if (presale.id) {
+      if (typeof presale.isPostsale === "boolean") {
+        if (presale.isPostsale) button = btn;
+      } else if (new Date(presale.end_time).getTime() < Date.now())
+        button = btn;
+    }
+  };
   return (
     <div className="py-4">
       <div className="container">
@@ -82,27 +115,12 @@ const CreatorDetails = ({ active }) => {
             />
             <div className="text-end">
               <Link
-                to={`/${
-                  // if presale's end_time is past then return postsale else presale
-                  (new Date(presale.end_time).getTime() < Date.now() ||
-                    presale.isPostsale) &&
-                  presale?.id
-                    ? "postsale"
-                    : "presale"
-                }${presale?.id ? "/" + presale?.id : ""}`}
+                to={renderUrl()}
                 className="btn text-white btn-primary me-3 px-5 py-2 rounded-pill"
               >
                 <span className="h6">Buy</span>
               </Link>
-              {(new Date(presale.end_time).getTime() < Date.now() ||
-                presale.isPostsale) && (
-                <Link
-                  to={"/postsale/" + presale.id}
-                  className="btn text-white btn-dark px-5 py-2 rounded-pill"
-                >
-                  <span className="h6">Sell</span>
-                </Link>
-              )}
+              {renderButton()}
             </div>
           </div>
         </div>

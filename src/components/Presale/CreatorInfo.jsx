@@ -7,6 +7,22 @@ import {
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 const CreatorInfo = ({ creator, presale, isProfile = false }) => {
+  const renderUrl = () => {
+    let name;
+    if (presale.id) {
+      if (typeof presale.isPostsale === "boolean") {
+        if (presale.isPostsale) {
+          name = "postsale";
+        } else {
+          name = "presale";
+        }
+      } else if (new Date(presale.end_time).getTime() < Date.now())
+        name = "postsale";
+    } else {
+      name = "presale";
+    }
+    return `/${name}${presale?.id ? "/" + presale?.id : ""}`;
+  };
   return (
     <div className="py-5">
       <div className="container">
@@ -51,14 +67,7 @@ const CreatorInfo = ({ creator, presale, isProfile = false }) => {
               </Link>
             ) : (
               <Link
-                to={`/${
-                  // if presale's end_time is past then return postsale else presale
-                  (new Date(presale.end_time).getTime() < Date.now() ||
-                    presale.isPostsale) &&
-                  presale?.id
-                    ? "postsale"
-                    : "presale"
-                }${presale?.id ? "/" + presale?.id : ""}`}
+                to={renderUrl()}
                 className="btn text-white btn-primary me-3 px-5 py-2 rounded-pill"
               >
                 <span className="h6 me-2">Buy</span>

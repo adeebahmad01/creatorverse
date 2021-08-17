@@ -99,9 +99,10 @@ const Summary = () => {
       setError(err);
     }
   };
-  const personActive = activeUser.creators_subscribed.find((points) => {
-    return points.creatorId === presale.creators?.name;
-  });
+  const personActive =
+    activeUser.creators_subscribed.find((points) => {
+      return points.creatorId === presale.creators?.name;
+    }) || {};
   const handleSubmit2 = async (event) => {
     event.preventDefault();
     try {

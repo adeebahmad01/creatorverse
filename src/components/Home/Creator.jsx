@@ -15,12 +15,12 @@ const Creator = () => {
               const presale =
                 presales.find((presale) => presale.creators?.name === el.id) ||
                 {};
-              return (
-                new Date(presale.end_time).getTime() > Date.now() &&
-                !presale.isPostsale
-              );
+              if (typeof presale.isPostsale === "boolean")
+                return !presale.isPostsale;
+              if (new Date(presale.end_time).getTime() > Date.now())
+                return false;
+              return true;
             })
-            .slice(0, 5)
             .map((el) => {
               const presale =
                 presales.find((presale) => presale.creators?.name === el.id) ||
