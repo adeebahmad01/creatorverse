@@ -3,7 +3,7 @@ import RewardCard from "./../utils/RewardCard";
 import { useData } from "../../context/DataContext";
 
 const SuggestReward = ({ active = 0, portfolio }) => {
-  const { rewards: rewardsAll, creators, activeUser } = useData();
+  const { rewards: rewardsAll, creators, activeUser = {} } = useData();
   const [rewards, setRewards] = React.useState([]);
   const [creator, setCreator] = React.useState({});
   // set creator in useEffect
@@ -18,7 +18,22 @@ const SuggestReward = ({ active = 0, portfolio }) => {
   // set rewards by creator
   React.useEffect(() => {
     setRewards(
-      rewardsAll.filter((reward) => reward?.creators?.name === creator.id)
+      rewardsAll
+        .filter((reward) => reward?.creators?.name === creator.id)
+        .sort((a, b) => {
+          const personActive =
+            (activeUser?.creators_subscribed || []).find(
+              (el) => el.creatorId === a?.creators?.name
+            ) || {};
+          const personActive2 =
+            (activeUser?.creators_subscribed || []).find(
+              (el) => el.creatorId === b?.creators?.name
+            ) || {};
+          return (
+            ((personActive2.points_owned || 0) / b.price) * 100 -
+            ((personActive.points_owned || 0) / a.price) * 100
+          );
+        })
     );
   }, [creator, rewardsAll]);
 
