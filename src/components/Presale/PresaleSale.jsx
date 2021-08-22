@@ -4,7 +4,7 @@ import { db } from "../../config/Firebase";
 import { useData } from "../../context/DataContext";
 import { useHandling } from "../../context/HandleContext";
 
-const PresaleSale = ({ presale }) => {
+const PresaleSale = ({ presale, handleSubmit: handleSecretSubmit }) => {
   const ref = useRef(null);
   const { activeUser } = useData();
   const { setError } = useHandling();
@@ -78,80 +78,91 @@ const PresaleSale = ({ presale }) => {
       return points.creatorId === presale.creators?.name;
     }) || {};
   return (
-    <div className="py-5">
+    <>
       <div className="container">
-        <div className="row mb-3">
-          <div className="col-lg">
-            <h6>Sale Ends In</h6>
-            <h1 style={{ "--primary": "#c44d16" }} className="active fw-bold">
-              {times
-                .map((el) =>
-                  timeLeft[el] > 9
-                    ? timeLeft[el]
-                    : timeLeft[el]
-                    ? "0" + timeLeft[el]
-                    : "00"
-                )
-                .join(":")}
-              <img
-                src="https://forum.bubble.io/uploads/default/original/3X/b/c/bcaa47ad6c458b27fdda1af74a286cbd6117f7c7.gif"
-                alt="Loader"
-                width={60}
-              />
-            </h1>
+        <div className="text-end">
+          <form onSubmit={handleSecretSubmit} action="">
+            <button className="btn bg-white border-white btn-light text-white">
+              Convert to Presale
+            </button>
+          </form>
+        </div>
+      </div>
+      <div className="py-5">
+        <div className="container">
+          <div className="row mb-3">
+            <div className="col-lg">
+              <h6>Sale Ends In</h6>
+              <h1 style={{ "--primary": "#c44d16" }} className="active fw-bold">
+                {times
+                  .map((el) =>
+                    timeLeft[el] > 9
+                      ? timeLeft[el]
+                      : timeLeft[el]
+                      ? "0" + timeLeft[el]
+                      : "00"
+                  )
+                  .join(":")}
+                <img
+                  src="https://forum.bubble.io/uploads/default/original/3X/b/c/bcaa47ad6c458b27fdda1af74a286cbd6117f7c7.gif"
+                  alt="Loader"
+                  width={60}
+                />
+              </h1>
+            </div>
+            <div className="col-lg">
+              <h6>Price Per Unit</h6>
+              <h1 className="active fw-bold">{presale.price}</h1>
+            </div>
+            <div className="col-lg-5">
+              <h6>Unit Sold</h6>
+              <h1 className="active fw-bold">
+                {(+presale.points_sold)?.toLocaleString()}/
+                {(+presale.total_points)?.toLocaleString()}
+              </h1>
+              <div className="progress rounded-pill" style={{ height: "20px" }}>
+                <div
+                  className="progress-bar rounded-pill custom"
+                  role="progressbar"
+                  style={{
+                    width: `${
+                      (presale.points_sold / presale.total_points) * 100
+                    }%`,
+                  }}
+                  aria-valuenow={presale.points_sold}
+                  aria-valuemin="0"
+                  aria-valuemax={presale.total_points}
+                ></div>
+              </div>
+            </div>
           </div>
-          <div className="col-lg">
-            <h6>Price Per Unit</h6>
-            <h1 className="active fw-bold">{presale.price}</h1>
-          </div>
-          <div className="col-lg-5">
-            <h6>Unit Sold</h6>
-            <h1 className="active fw-bold">
-              {(+presale.points_sold)?.toLocaleString()}/
-              {(+presale.total_points)?.toLocaleString()}
-            </h1>
-            <div className="progress rounded-pill" style={{ height: "20px" }}>
-              <div
-                className="progress-bar rounded-pill custom"
-                role="progressbar"
-                style={{
-                  width: `${
-                    (presale.points_sold / presale.total_points) * 100
-                  }%`,
-                }}
-                aria-valuenow={presale.points_sold}
-                aria-valuemin="0"
-                aria-valuemax={presale.total_points}
-              ></div>
+          <div className="row">
+            <div className="col-lg-4">
+              <h6>Points You Own</h6>
+              <h1 className="active fw-bold">
+                {(+activePresale.points_owned || 0)?.toLocaleString()}
+              </h1>
+            </div>
+            <div className="col-lg-5">
+              <h6>Buy Points</h6>
+              <form onSubmit={handleSubmit} className="d-flex">
+                <TextField
+                  type="text"
+                  inputRef={ref}
+                  variant="standard"
+                  placeholder="# of points"
+                  inputProps={{ className: `p-3` }}
+                  className="form-control overflow-hidden border rounded-pill"
+                />
+                <button className="btn btn-primary ms-3 rounded-pill custom px-5">
+                  Buy
+                </button>
+              </form>
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-lg-4">
-            <h6>Points You Own</h6>
-            <h1 className="active fw-bold">
-              {(+activePresale.points_owned || 0)?.toLocaleString()}
-            </h1>
-          </div>
-          <div className="col-lg-5">
-            <h6>Buy Points</h6>
-            <form onSubmit={handleSubmit} className="d-flex">
-              <TextField
-                type="text"
-                inputRef={ref}
-                variant="standard"
-                placeholder="# of points"
-                inputProps={{ className: `p-3` }}
-                className="form-control overflow-hidden border rounded-pill"
-              />
-              <button className="btn btn-primary ms-3 rounded-pill custom px-5">
-                Buy
-              </button>
-            </form>
-          </div>
-        </div>
       </div>
-    </div>
+    </>
   );
 };
 

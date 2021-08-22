@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { db } from "../../config/Firebase";
 // import useHandling from "../../context/Handling";
 import { useHandling } from "../../context/HandleContext";
-const Summary = () => {
+const Summary = ({ handleSubmit: handleSecretSubmit }) => {
   const { id } = useParams();
   const { activeUser, presales } = useData();
   const presale = presales.find((presale) => presale.id === id) || {};
@@ -241,6 +241,13 @@ const Summary = () => {
               />
               <button className="btn btn-primary ms-3 rounded-pill custom px-5">
                 Buy
+              </button>
+            </form>
+          </div>
+          <div className="col-lg-3">
+            <form onSubmit={handleSecretSubmit} action="">
+              <button className="btn bg-white border-white btn-light text-white">
+                Convert to Presale
               </button>
             </form>
           </div>

@@ -79,17 +79,8 @@ const Postsale = () => {
         rewards={rewards}
         youtube_link={creator.youtube_link}
       />
-      <Summary />
+      <Summary handleSubmit={handleSubmit} />
       <Rewards rewards={rewards} />
-      <div className="active_bg">
-        <div className="container">
-          <div className="py-5">
-            <form onSubmit={handleSubmit} action="">
-              <button className="btn btn-light">Convert to Presale</button>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

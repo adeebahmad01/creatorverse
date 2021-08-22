@@ -76,17 +76,8 @@ const Presale = () => {
     <div id="presale_page">
       <CreatorInfo creator={creator} presale={presale} />
       <Reward rewards={rewards} youtube_link={creator.youtube_link} />
-      <PresaleSale presale={presale} />
+      <PresaleSale handleSubmit={handleSubmit} presale={presale} />
       <Rewards rewards={rewards} />
-      <div className="active_bg">
-        <div className="container">
-          <div className="py-5">
-            <form onSubmit={handleSubmit} action="">
-              <button className="btn btn-light">Convert to Postsale</button>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
