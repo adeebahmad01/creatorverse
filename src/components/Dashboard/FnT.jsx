@@ -108,7 +108,36 @@ const Row = ({ setImages, row, i }) => {
             onClose={() => setDialogOpen(false)}
             onSuccess={async () => {
               if (input) {
-                await db.collection(input).doc(row.id).delete();
+                const ref = db.collection(value).doc(row.id);
+                const batch = db.batch();
+                batch.delete(ref);
+                if (value === "creators") {
+                  data.investors.forEach(async (el) => {
+                    const i = el.creators_subscribed?.findIndex(
+                      (e) => e.creatorId === row.id
+                    );
+                    if (i !== -1) {
+                      el.creators_subscribed.splice(i, 1);
+                      const investorRef = db.collection("investors").doc(el.id);
+                      batch.update(investorRef, {
+                        creators_subscribed: el.creators_subscribed,
+                      });
+                    }
+                  });
+                  data.rewards.forEach(async (el) => {
+                    if (el.creators?.name === row.id) {
+                      const rewardRef = db.collection("rewards").doc(el.id);
+                      batch.delete(rewardRef);
+                    }
+                  });
+                  data.presales.forEach(async (el) => {
+                    if (el.creators?.name === row.id) {
+                      const presaleRef = db.collection("presales").doc(el.id);
+                      batch.delete(presaleRef);
+                    }
+                  });
+                }
+                await batch.commit();
               }
               if (active.images) {
                 active.images.forEach((el) => {

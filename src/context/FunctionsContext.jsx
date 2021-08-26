@@ -231,7 +231,7 @@ const FunctionsContextProvider = ({ children }) => {
             variant="standard"
             className="field_input text-capitalize"
             value={
-              el.extras.multiple
+              el?.extras?.multiple
                 ? selectValues[el.name]?.name || []
                 : selectValues[el.name]?.name || ""
             }

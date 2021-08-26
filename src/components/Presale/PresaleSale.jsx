@@ -45,12 +45,8 @@ const PresaleSale = ({ presale, handleSubmit: handleSecretSubmit }) => {
         points_owned: (+activeUser.points_owned || 0) + +ref.current.value,
       };
 
-      batch.update(db.collection("presales").doc(presale.id), {
-        points_sold,
-      });
-      batch.set(db.collection("investors").doc(activeUser.id), investorData, {
-        merge: true,
-      });
+      batch.update(db.collection("presales").doc(presale.id), { points_sold });
+      batch.update(db.collection("investors").doc(activeUser.id), investorData);
       await batch.commit();
       ref.current.value = "";
     } catch (err) {
@@ -119,6 +115,7 @@ const PresaleSale = ({ presale, handleSubmit: handleSecretSubmit }) => {
             <div className="col-lg-5">
               <h6>Unit Sold</h6>
               <h1 className="active fw-bold">
+                {console.log(presale.points_sold)}
                 {(+presale.points_sold)?.toLocaleString()}/
                 {(+presale.total_points)?.toLocaleString()}
               </h1>
