@@ -53,10 +53,10 @@ const Graph = () => {
         <div className="fw-bold">
           <h1 className="active fw-bold">${total.toLocaleString()}</h1>
           <p>
-            <span className="text-success">+2.21$(+4.56%)</span> Today
+            <span className="text-success">+$2.21(+4.56%)</span> Today
           </p>
           <div>
-            <span className="text-success">+2.21$(+4.56%)</span> After Hours
+            <span className="text-success">+$2.21(+4.56%)</span> After Hours
           </div>
         </div>
         <div className="graph">

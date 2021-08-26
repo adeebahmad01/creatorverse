@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { db } from "../../config/Firebase";
 // import useHandling from "../../context/Handling";
 import { useHandling } from "../../context/HandleContext";
-const Summary = ({ handleSubmit: handleSecretSubmit }) => {
+const Summary = ({ handleSubmit: handleSecretSubmit, creator }) => {
   const { id } = useParams();
   const { activeUser, presales } = useData();
   const presale = presales.find((presale) => presale.id === id) || {};
@@ -87,12 +87,8 @@ const Summary = ({ handleSubmit: handleSecretSubmit }) => {
         points_owned: (+activeUser.points_owned || 0) + +ref.current.value,
       };
 
-      batch.update(db.collection("presales").doc(presale.id), {
-        points_sold,
-      });
-      batch.set(db.collection("investors").doc(activeUser.id), investorData, {
-        merge: true,
-      });
+      batch.update(db.collection("presales").doc(presale.id), { points_sold });
+      batch.update(db.collection("investors").doc(activeUser.id), investorData);
       await batch.commit();
       ref.current.value = "";
     } catch (err) {
@@ -149,6 +145,13 @@ const Summary = ({ handleSubmit: handleSecretSubmit }) => {
     <div className="my-3 pt-4">
       <div className="container">
         <div className="row">
+          <div className="col-12 text-end">
+            <form onSubmit={handleSecretSubmit} action="">
+              <button className="btn bg-white border-white btn-light text-white">
+                Convert to Presale
+              </button>
+            </form>
+          </div>
           <div className="col-lg-4 d-flex justify-content-center flex-column align-items-center">
             <div className="rounded-5 custom w-100 p-3">
               <div className="d-flex text-white p-2 justify-content-between">
@@ -173,7 +176,10 @@ const Summary = ({ handleSubmit: handleSecretSubmit }) => {
                 Price Per Point
               </span>
               <h1 className="active">
-                {(personActive.price || 0).toLocaleString()}$
+                $
+                {(
+                  +creator?.fraction_postsale_price?.split("$")?.[0] || 0
+                ).toLocaleString()}
               </h1>
             </div>
           </div>
@@ -206,10 +212,10 @@ const Summary = ({ handleSubmit: handleSecretSubmit }) => {
                 ).toLocaleString()}
               </h3>
               <div>
-                <span className="text-success">+2.21$(+4.56%)</span> Today
+                <span className="text-success">+$2.21(+4.56%)</span> Today
               </div>
               <div>
-                <span className="text-success">+2.21$(+4.56%)</span> After Hours
+                <span className="text-success">+$2.21(+4.56%)</span> After Hours
               </div>
             </div>
             <ReactApexCharts
@@ -241,13 +247,6 @@ const Summary = ({ handleSubmit: handleSecretSubmit }) => {
               />
               <button className="btn btn-primary ms-3 rounded-pill custom px-5">
                 Buy
-              </button>
-            </form>
-          </div>
-          <div className="col-lg-3">
-            <form onSubmit={handleSecretSubmit} action="">
-              <button className="btn bg-white border-white btn-light text-white">
-                Convert to Presale
               </button>
             </form>
           </div>

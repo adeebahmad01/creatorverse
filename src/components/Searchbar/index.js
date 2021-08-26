@@ -11,8 +11,27 @@ export const SearchWrapper = styled.div`
   background-size: contain;
 `;
 const SearchBar = () => {
-  const { creators } = useData();
+  const { creators, presales } = useData();
   const [open, setOpen] = useState(false);
+  const renderUrl = (id) => {
+    const presale =
+      presales.find((presale) => presale.creators?.name === id) || {};
+    let name;
+    if (presale.id) {
+      if (typeof presale.isPostsale === "boolean") {
+        if (presale.isPostsale) {
+          name = "postsale";
+        } else {
+          name = "presale";
+        }
+      } else if (new Date(presale.end_time).getTime() < Date.now())
+        name = "postsale";
+      else name = "presale";
+    } else {
+      name = "presale";
+    }
+    return `/${name}${presale?.id ? "/" + presale?.id : ""}`;
+  };
   return (
     <SearchWrapper className="py-5">
       <div className="container" style={{ maxWidth: 768 }}>
@@ -32,7 +51,7 @@ const SearchBar = () => {
                 openOnFocus={false}
                 open={open}
                 renderOption={(e, option) => (
-                  <Link {...e} to={`/profile/${option.id}`}>
+                  <Link {...e} to={renderUrl(option.id)}>
                     {option.name}
                   </Link>
                 )}

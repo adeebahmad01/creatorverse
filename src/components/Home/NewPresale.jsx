@@ -17,9 +17,12 @@ const Presale = () => {
           </div>
         </h3>
         <div className="row">
-          {creators.slice(0, 6).map((el) => (
-            <ProfileCard {...el} />
-          ))}
+          {creators
+            .filter((creator) => creator.type?.name?.includes("new"))
+            .slice(0, 6)
+            .map((el) => (
+              <ProfileCard {...el} />
+            ))}
         </div>
       </div>
     </section>

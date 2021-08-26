@@ -54,7 +54,7 @@ const CreatorGraph = () => {
                       strokeWidth={1}
                     />
                   </svg>
-                  {(Math.random() * 20 + 1).toFixed(2)}$
+                  ${(Math.random() * 20 + 1).toFixed(2)}
                 </div>
               ))}
             </div>

@@ -79,7 +79,7 @@ const Postsale = () => {
         rewards={rewards}
         youtube_link={creator.youtube_link}
       />
-      <Summary handleSubmit={handleSubmit} />
+      <Summary creator={creator} handleSubmit={handleSubmit} />
       <Rewards rewards={rewards} />
     </div>
   );

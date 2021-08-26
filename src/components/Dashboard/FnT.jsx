@@ -25,6 +25,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import TablePaginationActions from "../utils/TablePagination";
+import ConfirmPopup from "../utils/ConfirmPopup";
 import { db, storage } from "../../config/Firebase";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import Popup from "./Popup";
@@ -46,6 +47,8 @@ const Row = ({ setImages, row, i }) => {
   const classes = useRowStyles();
   const value = page || input || component;
   const active = allInputs[value];
+  const [dialogOpen, setDialogOpen] = useState(false);
+  console.log(dialogOpen);
   return (
     <>
       <TableRow className={classes.root}>
@@ -76,10 +79,8 @@ const Row = ({ setImages, row, i }) => {
             className="text-capitalize"
             key={i}
           >
-            {console.log(data?.[el?.params?.for])}
             {el?.params?.isId
               ? data?.[el?.params?.for].find((element) => {
-                  console.log(element.id === row[el.name]?.name);
                   return element.id === row[el.name]?.name;
                 })?.name || "Creator Not Found"
               : row[el.name]?.name}
@@ -101,27 +102,38 @@ const Row = ({ setImages, row, i }) => {
           </TableCell>
         ))}
         <TableCell align="right">
+          <ConfirmPopup
+            name={value}
+            open={dialogOpen}
+            onClose={() => setDialogOpen(false)}
+            onSuccess={async () => {
+              if (input) {
+                await db.collection(input).doc(row.id).delete();
+              }
+              if (active.images) {
+                active.images.forEach((el) => {
+                  row[el.name].forEach((el) => {
+                    storage
+                      .refFromURL(el.src)
+                      .delete()
+                      .then(() => {
+                        console.log("DELETED EVERYTHING");
+                        setDialogOpen(false);
+                      });
+                  });
+                });
+              } else {
+                setDialogOpen(false);
+              }
+            }}
+          />
           <ButtonGroup className="btn-group">
             {/* Button to Delete the Exercise */}
             <Button
               variant="contained"
               color="primary"
-              onClick={async () => {
-                if (input) {
-                  await db.collection(input).doc(row.id).delete();
-                }
-                if (active.images) {
-                  active.images.forEach((el) => {
-                    row[el.name].forEach((el) => {
-                      storage
-                        .refFromURL(el.src)
-                        .delete()
-                        .then(() => {
-                          console.log("DELETED EVERYTHING");
-                        });
-                    });
-                  });
-                }
+              onClick={() => {
+                setDialogOpen(true);
               }}
             >
               <DeleteIcon />

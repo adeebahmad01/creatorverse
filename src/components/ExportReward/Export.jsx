@@ -83,12 +83,12 @@ const Export = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <div>Openseas Fee</div>
                 <Divider className="w-50 active_bg" />
-                <span>2.50%({fees.openSeasFee.toFixed(2)}$)</span>
+                <span>2.50%(${fees.openSeasFee.toFixed(2)})</span>
               </div>
               <div className="d-flex justify-content-between align-items-center">
                 <div>Platform Fee</div>
                 <Divider className="w-50 active_bg" />
-                <span>10%({fees.platformFee.toFixed(2)}$)</span>
+                <span>10%(${fees.platformFee.toFixed(2)})</span>
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@ const Export = () => {
               </span>
             </div>
             <h1 className="text-end active mb-4">
-              {(+total.toFixed(2)).toLocaleString()}$
+              ${(+total.toFixed(2)).toLocaleString()}
             </h1>
           </div>
           <div className="col-12 py-3">

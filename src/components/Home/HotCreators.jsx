@@ -18,9 +18,12 @@ const HotCreators = () => {
           </div>
         </h3>
         <div className="row">
-          {creators.slice(0, 6).map((el) => (
-            <ProfileCard {...el} />
-          ))}
+          {creators
+            .filter((creator) => creator.type?.name?.includes("hot"))
+            .slice(0, 6)
+            .map((el) => (
+              <ProfileCard {...el} />
+            ))}
         </div>
       </div>
     </section>

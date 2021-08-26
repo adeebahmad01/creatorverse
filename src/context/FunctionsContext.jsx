@@ -56,6 +56,28 @@ const FunctionsContextProvider = ({ children }) => {
         { name: "wallet_address" },
         { name: "royality_cut", type: { name: `number`, unit: "$" } },
       ],
+      selects: [
+        {
+          name: "type",
+          options: [
+            {
+              name: "Recommended Creators",
+              id: "recommended",
+            },
+            {
+              name: "Hot Creators",
+              id: "hot",
+            },
+            {
+              name: "New Presale",
+              id: "new",
+            },
+          ],
+          extras: {
+            multiple: true,
+          },
+        },
+      ],
       images: [{ name: "profile_image" }],
       defaultFields: {
         rewards: [],
@@ -208,10 +230,15 @@ const FunctionsContextProvider = ({ children }) => {
             fullWidth
             variant="standard"
             className="field_input text-capitalize"
-            value={selectValues[el.name]?.name || ""}
+            value={
+              el.extras.multiple
+                ? selectValues[el.name]?.name || []
+                : selectValues[el.name]?.name || ""
+            }
             onChange={(e) =>
               setSelects((n) => ({ ...n, [el.name]: { name: e.target.value } }))
             }
+            {...el.extras}
           >
             <MenuItem disabled value="">
               <em className="text-capitalize">

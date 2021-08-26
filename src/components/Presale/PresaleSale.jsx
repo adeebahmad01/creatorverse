@@ -112,7 +112,9 @@ const PresaleSale = ({ presale, handleSubmit: handleSecretSubmit }) => {
             </div>
             <div className="col-lg">
               <h6>Price Per Unit</h6>
-              <h1 className="active fw-bold">{presale.price}</h1>
+              <h1 className="active fw-bold">
+                ${presale.price?.split("$")?.[0]}
+              </h1>
             </div>
             <div className="col-lg-5">
               <h6>Unit Sold</h6>
