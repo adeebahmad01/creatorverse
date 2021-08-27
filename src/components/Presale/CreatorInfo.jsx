@@ -27,7 +27,7 @@ const CreatorInfo = ({ creator, presale, isProfile = false }) => {
     <div className="py-5">
       <div className="container">
         <div className="row">
-          <div className="col-lg-3 px-5">
+          <div className="col-lg-3 px-2">
             <img
               className="w-100 shadow-sm rounded-5 objfit"
               src={creator.profile_image?.[0]?.src}

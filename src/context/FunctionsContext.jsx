@@ -75,6 +75,7 @@ const FunctionsContextProvider = ({ children }) => {
           ],
           extras: {
             multiple: true,
+            required: false,
           },
         },
       ],

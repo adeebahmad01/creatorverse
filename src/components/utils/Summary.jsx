@@ -145,13 +145,6 @@ const Summary = ({ handleSubmit: handleSecretSubmit, creator }) => {
     <div className="my-3 pt-4">
       <div className="container">
         <div className="row">
-          <div className="col-12 text-end">
-            <form onSubmit={handleSecretSubmit} action="">
-              <button className="btn bg-white border-white btn-light text-white">
-                Convert to Presale
-              </button>
-            </form>
-          </div>
           <div className="col-lg-4 d-flex justify-content-center flex-column align-items-center">
             <div className="rounded-5 custom w-100 p-3">
               <div className="d-flex text-white p-2 justify-content-between">

@@ -74,9 +74,21 @@ const Presale = () => {
   };
   return (
     <div id="presale_page">
-      <CreatorInfo creator={creator} presale={presale} />
-      <Reward rewards={rewards} youtube_link={creator.youtube_link} />
-      <PresaleSale handleSubmit={handleSubmit} presale={presale} />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6 d-flex justify-content-center align-items-center flex-column">
+            <PresaleSale presale={presale} />
+          </div>
+          <div className="col-md-6">
+            <CreatorInfo creator={creator} presale={presale} />
+            <Reward
+              handleSubmit={handleSubmit}
+              rewards={rewards}
+              youtube_link={creator.youtube_link}
+            />
+          </div>
+        </div>
+      </div>
       <Rewards rewards={rewards} />
     </div>
   );

@@ -73,13 +73,23 @@ const Postsale = () => {
   };
   return (
     <div>
-      <CreatorInfo creator={creator} presale={presale} />
-      <Reward
-        creatorId={creator.id}
-        rewards={rewards}
-        youtube_link={creator.youtube_link}
-      />
-      <Summary creator={creator} handleSubmit={handleSubmit} />
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-6">
+            <Reward
+              creatorId={creator.id}
+              rewards={rewards}
+              youtube_link={creator.youtube_link}
+              handleSubmit={handleSubmit}
+            />
+          </div>
+          <div className="col-lg-6">
+            <CreatorInfo creator={creator} presale={presale} />
+          </div>
+        </div>
+      </div>
+
+      <Summary creator={creator} />
       <Rewards rewards={rewards} />
     </div>
   );

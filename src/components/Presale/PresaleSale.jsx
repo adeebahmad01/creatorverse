@@ -4,7 +4,7 @@ import { db } from "../../config/Firebase";
 import { useData } from "../../context/DataContext";
 import { useHandling } from "../../context/HandleContext";
 
-const PresaleSale = ({ presale, handleSubmit: handleSecretSubmit }) => {
+const PresaleSale = ({ presale }) => {
   const ref = useRef(null);
   const { activeUser } = useData();
   const { setError } = useHandling();
@@ -44,7 +44,6 @@ const PresaleSale = ({ presale, handleSubmit: handleSecretSubmit }) => {
         ...activeUser,
         points_owned: (+activeUser.points_owned || 0) + +ref.current.value,
       };
-
       batch.update(db.collection("presales").doc(presale.id), { points_sold });
       batch.update(db.collection("investors").doc(activeUser.id), investorData);
       await batch.commit();
@@ -75,16 +74,8 @@ const PresaleSale = ({ presale, handleSubmit: handleSecretSubmit }) => {
     }) || {};
   return (
     <>
-      <div className="container">
-        <div className="text-end">
-          <form onSubmit={handleSecretSubmit} action="">
-            <button className="btn bg-white border-white btn-light text-white">
-              Convert to Presale
-            </button>
-          </form>
-        </div>
-      </div>
       <div className="py-5">
+        <h1 className="mb-5 active">Presale</h1>
         <div className="container">
           <div className="row mb-3">
             <div className="col-lg">
@@ -112,7 +103,7 @@ const PresaleSale = ({ presale, handleSubmit: handleSecretSubmit }) => {
                 ${presale.price?.split("$")?.[0]}
               </h1>
             </div>
-            <div className="col-lg-5">
+            <div className="col-5">
               <h6>Unit Sold</h6>
               <h1 className="active fw-bold">
                 {console.log(presale.points_sold)}
@@ -136,13 +127,13 @@ const PresaleSale = ({ presale, handleSubmit: handleSecretSubmit }) => {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-4">
+            <div className="col-12">
               <h6>Points You Own</h6>
               <h1 className="active fw-bold">
                 {(+activePresale.points_owned || 0)?.toLocaleString()}
               </h1>
             </div>
-            <div className="col-lg-5">
+            <div className="col-12">
               <h6>Buy Points</h6>
               <form onSubmit={handleSubmit} className="d-flex">
                 <TextField
