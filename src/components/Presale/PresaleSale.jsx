@@ -78,7 +78,7 @@ const PresaleSale = ({ presale }) => {
         <h1 className="mb-5 active">Presale</h1>
         <div className="container">
           <div className="row mb-3">
-            <div className="col-lg">
+            <div className="col-7">
               <h6>Sale Ends In</h6>
               <h1 style={{ "--primary": "#c44d16" }} className="active fw-bold">
                 {times
@@ -97,13 +97,13 @@ const PresaleSale = ({ presale }) => {
                 />
               </h1>
             </div>
-            <div className="col-lg">
+            <div className="col-5">
               <h6>Price Per Unit</h6>
               <h1 className="active fw-bold">
                 ${presale.price?.split("$")?.[0]}
               </h1>
             </div>
-            <div className="col-5">
+            <div className="col-6">
               <h6>Unit Sold</h6>
               <h1 className="active fw-bold">
                 {console.log(presale.points_sold)}

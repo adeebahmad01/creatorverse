@@ -65,9 +65,13 @@ const Postsale = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Covert isPostsale to false in cloud firestore's presale
-    await db.collection("presales").doc(id).update({
-      isPostsale: false,
-    });
+    await db
+      .collection("presales")
+      .doc(id)
+      .update({
+        isPostsale: false,
+        end_time: new Date(Date.now() + 86400000).toISOString(),
+      });
     setSuccess(new Error("Postsale successfully converted to presale"));
     push(`/presale/${id}`);
   };

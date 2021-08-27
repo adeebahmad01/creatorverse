@@ -22,10 +22,10 @@ const Creator = () => {
               return true;
             })
             .map((el) => {
-              const presale =
-                presales.find((presale) => presale.creators?.name === el.id) ||
-                {};
-              return (
+              const presale = presales.find(
+                (presale) => presale.creators?.name === el.id
+              );
+              return presale ? (
                 <div className="container">
                   <div className="row">
                     <div className="col-lg-6">
@@ -59,7 +59,7 @@ const Creator = () => {
                     </div>
                   </div>
                 </div>
-              );
+              ) : undefined;
             })}
         </Slider>
       </div>
