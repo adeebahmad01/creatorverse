@@ -5,7 +5,7 @@ import Summary from "../components/utils/Summary";
 import Rewards from "../components/Presale/Rewards";
 import { useHistory, useParams } from "react-router-dom";
 import { useData } from "../context/DataContext";
-import { db } from "../config/Firebase";
+import firebase, { db } from "../config/Firebase";
 import { useHandling } from "../context/HandleContext";
 const Postsale = () => {
   const { id } = useParams();
@@ -69,7 +69,7 @@ const Postsale = () => {
       .collection("presales")
       .doc(id)
       .update({
-        isPostsale: false,
+        isPostsale: firebase.firestore.FieldValue.delete(),
         end_time: new Date(Date.now() + 86400000).toISOString(),
       });
     setSuccess(new Error("Postsale successfully converted to presale"));

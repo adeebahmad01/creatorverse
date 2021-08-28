@@ -106,7 +106,6 @@ const PresaleSale = ({ presale }) => {
             <div className="col-6">
               <h6>Unit Sold</h6>
               <h1 className="active fw-bold">
-                {console.log(presale.points_sold)}
                 {(+presale.points_sold)?.toLocaleString()}/
                 {(+presale.total_points)?.toLocaleString()}
               </h1>
