@@ -76,7 +76,7 @@ const Presale = () => {
     <div id="presale_page">
       <div className="container">
         <div className="row">
-          <div className="col-md-6 d-flex justify-content-center align-items-center flex-column">
+          <div className="col-md-6 py-5">
             <PresaleSale presale={presale} />
           </div>
           <div className="col-md-6">

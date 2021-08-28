@@ -17,11 +17,8 @@ const Creator = () => {
                 {};
               if (presale.id) {
                 if (typeof presale.isPostsale === "boolean") {
-                  if (presale.isPostsale) {
-                    return false;
-                  } else {
-                    return true;
-                  }
+                  if (presale.isPostsale) return false;
+                  else return true;
                 } else if (new Date(presale.end_time).getTime() < Date.now())
                   return false;
                 else return true;
