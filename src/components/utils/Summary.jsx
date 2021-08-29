@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { db } from "../../config/Firebase";
 // import useHandling from "../../context/Handling";
 import { useHandling } from "../../context/HandleContext";
-const Summary = ({ handleSubmit: handleSecretSubmit, creator }) => {
+const Summary = ({ creator }) => {
   const { id } = useParams();
   const { activeUser, presales } = useData();
   const presale = presales.find((presale) => presale.id === id) || {};
@@ -74,7 +74,7 @@ const Summary = ({ handleSubmit: handleSecretSubmit, creator }) => {
       } else {
         activeUser.creators_subscribed.push({
           creatorId: presale.creators?.name,
-          price: presale.price.split("$")[0],
+          price: +creator?.fraction_presale_price?.split("$")?.[0],
           points_owned: +ref.current.value,
           market_value: 0,
           day_gain: 0,
@@ -201,7 +201,8 @@ const Summary = ({ handleSubmit: handleSecretSubmit, creator }) => {
               <h3 className="active fw-bold">
                 $
                 {(
-                  personActive.points_owned * personActive.price || 0
+                  personActive.points_owned *
+                    +creator?.fraction_postsale_price?.split("$")?.[0] || 0
                 ).toLocaleString()}
               </h3>
               <div>

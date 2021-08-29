@@ -3,7 +3,9 @@ import ReactApexCharts from "react-apexcharts";
 import { useData } from "../../context/DataContext";
 
 const Graph = () => {
-  const { activeUser } = useData();
+  const { creators, activeUser, presales } = useData();
+  const [name, setName] = useState("presale");
+
   const [state] = useState({
     series: [
       {
@@ -38,9 +40,30 @@ const Graph = () => {
       },
     },
   });
+  const checkPresaleOrPostSale = (presale) => {
+    if (presale?.id) {
+      if (typeof presale.isPostsale === "boolean") {
+        if (presale.isPostsale) {
+          return "postsale";
+        } else {
+          return "presale";
+        }
+      } else if (new Date(presale.end_time).getTime() < Date.now())
+        return "postsale";
+      else return "presale";
+    } else {
+      return "presale";
+    }
+  };
   // multiply all prices: number and points_owned: number owned in activeUser.creators_subscribed = [] by reduce method
   const total = activeUser.creators_subscribed.reduce((acc, curr) => {
-    const price = curr.price;
+    const creator =
+      creators.find((creator) => creator.id === curr?.creatorId) || {};
+    const presale =
+      presales.find((presale) => presale.creators.name === creator.id) || {};
+    const name = checkPresaleOrPostSale(presale);
+    console.log({ creator, presale, name });
+    const price = creator?.[`fraction_${name}_price`]?.split("$")?.[0];
     const points_owned = curr.points_owned;
     console.log({ price, points_owned });
     const price_points_owned = price * points_owned;

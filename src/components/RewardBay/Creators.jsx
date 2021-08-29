@@ -13,6 +13,7 @@ const Creators = ({ setActive, active }) => {
             className="px-3 transition"
             style={{ transform: `scale(${active === i ? 1.2 : 1})` }}
           >
+            <div className="text-truncate">{creator.name}</div>
             <img
               src={creator.profile_image?.[0]?.src}
               className="rounded-5 objfit shadow-sm w-100"

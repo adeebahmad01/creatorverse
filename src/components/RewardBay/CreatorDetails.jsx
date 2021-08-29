@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexCharts from "react-apexcharts";
 import { Link } from "react-router-dom";
 import { useData } from "../../context/DataContext";
 
 const CreatorDetails = ({ active }) => {
   const { creators, activeUser, presales } = useData();
+  const [name, setName] = useState("presale");
   const personActive = activeUser.creators_subscribed[active] || {};
   const creator =
     creators.find((creator) => creator.id === personActive?.creatorId) || {};
@@ -61,6 +62,21 @@ const CreatorDetails = ({ active }) => {
     }
     return `/${name}${presale?.id ? "/" + presale?.id : ""}`;
   };
+  useEffect(() => {
+    if (presale?.id) {
+      if (typeof presale.isPostsale === "boolean") {
+        if (presale.isPostsale) {
+          setName("postsale");
+        } else {
+          setName("presale");
+        }
+      } else if (new Date(presale.end_time).getTime() < Date.now())
+        setName("postsale");
+      else setName("presale");
+    } else {
+      setName("presale");
+    }
+  }, [presale, active]);
   const renderButton = () => {
     let button;
     const btn = (
@@ -91,7 +107,8 @@ const CreatorDetails = ({ active }) => {
               <h3 className="active">
                 $
                 {(
-                  personActive.points_owned * personActive.price || 0
+                  personActive.points_owned *
+                    creator?.[`fraction_${name}_price`]?.split("$")?.[0] || 0
                 ).toLocaleString()}
               </h3>
               <span>

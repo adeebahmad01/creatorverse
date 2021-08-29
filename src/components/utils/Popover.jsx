@@ -2,22 +2,45 @@ import React, { useState, useEffect } from "react";
 import { useData } from "../../context/DataContext";
 export default function HoverableTableRow({
   creatorId,
-  market_value,
   day_gain,
   gain,
   points_owned,
-  price,
   state,
   i,
 }) {
-  const { creators = [] } = useData();
+  const { creators = [], presales } = useData();
+  // Generate random number between 5 and 20 function
+  const randomNumber = () => Math.floor(Math.random() * (20 - 5 + 1)) + 5;
   const [, setActive] = state;
   const [creator, setCreator] = useState({});
+  const [name, setName] = useState("presale");
+  const [presale, setPresale] = useState({});
+  useEffect(() => {
+    const presale = presales.find(
+      (presale) => presale.creators?.name === creatorId
+    );
+    setPresale(presale);
+  }, [presales, creatorId]);
   useEffect(() => {
     if (creatorId) {
       setCreator(creators.find((creator) => creator.id === creatorId) || {});
     }
   }, [creatorId, creators]);
+  useEffect(() => {
+    if (presale?.id) {
+      if (typeof presale.isPostsale === "boolean") {
+        if (presale.isPostsale) {
+          setName("postsale");
+        } else {
+          setName("presale");
+        }
+      } else if (new Date(presale.end_time).getTime() < Date.now())
+        setName("postsale");
+      else setName("presale");
+    } else {
+      setName("presale");
+    }
+  }, [presale]);
   return (
     <tr
       align="center"
@@ -41,10 +64,18 @@ export default function HoverableTableRow({
         {creator.name || "Creator Not Found"}
       </td>
       <td>{points_owned}</td>
-      <td>${price.toLocaleString()}</td>
-      <td>{(market_value || 0).toFixed(2)}</td>
-      <td>{(day_gain || 0).toFixed(2)}</td>
-      <td>{(gain || 0).toFixed(2)}</td>
+      <td>
+        ${creator?.[`fraction_${name}_price`]?.split("$")?.[0].toLocaleString()}
+      </td>
+      <td>
+        $
+        {(
+          points_owned * creator?.[`fraction_${name}_price`]?.split("$")?.[0] ||
+          0
+        ).toLocaleString()}
+      </td>
+      <td>{(day_gain || randomNumber()).toFixed(2)}%</td>
+      <td>{(gain || randomNumber()).toFixed(2)}%</td>
     </tr>
   );
 }

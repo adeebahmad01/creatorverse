@@ -7,6 +7,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useData } from "../context/DataContext";
 import firebase, { db } from "../config/Firebase";
 import { useHandling } from "../context/HandleContext";
+import ReactPlayer from "react-player";
 const Postsale = () => {
   const { id } = useParams();
   const { push } = useHistory();
@@ -80,15 +81,22 @@ const Postsale = () => {
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
+            <CreatorInfo creator={creator} presale={presale} />
+          </div>
+          <div className="col-lg-6">
+            <div className="col-12 d-flex p-3 rounded-5 justify-content-center align-items-center">
+              <div className="p-3 w-100 rounded-5 border border-2 colored-border">
+                <ReactPlayer className="objfit" url={creator.youtube_link} />
+              </div>
+            </div>
+          </div>
+          <div className="col-12">
             <Reward
               creatorId={creator.id}
               rewards={rewards}
               youtube_link={creator.youtube_link}
               handleSubmit={handleSubmit}
             />
-          </div>
-          <div className="col-lg-6">
-            <CreatorInfo creator={creator} presale={presale} />
           </div>
         </div>
       </div>

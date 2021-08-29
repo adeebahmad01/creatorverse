@@ -4,7 +4,7 @@ import { db } from "../../config/Firebase";
 import { useData } from "../../context/DataContext";
 import { useHandling } from "../../context/HandleContext";
 
-const PresaleSale = ({ presale }) => {
+const PresaleSale = ({ presale, creator }) => {
   const ref = useRef(null);
   const { activeUser } = useData();
   const { setError } = useHandling();
@@ -32,7 +32,7 @@ const PresaleSale = ({ presale }) => {
       } else {
         activeUser.creators_subscribed.push({
           creatorId: presale.creators?.name,
-          price: presale.price.split("$")[0],
+          price: +creator?.fraction_presale_price?.split("$")?.[0],
           points_owned: +ref.current.value,
           market_value: 0,
           day_gain: 0,
@@ -100,7 +100,7 @@ const PresaleSale = ({ presale }) => {
             <div className="col-5">
               <h6>Price Per Unit</h6>
               <h1 className="active fw-bold">
-                ${presale.price?.split("$")?.[0]}
+                ${+creator?.fraction_presale_price?.split("$")?.[0]}
               </h1>
             </div>
             <div className="col-6">
