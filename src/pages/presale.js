@@ -92,6 +92,7 @@ const Presale = () => {
             rewards={rewards}
             youtube_link={creator.youtube_link}
           />
+          <hr style={{ height: 2 }} />
           <PresaleSale creator={creator} presale={presale} />
         </div>
       </div>
