@@ -77,7 +77,7 @@ const Presale = () => {
     <div id="presale_page">
       <div className="container">
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-6 pb-5">
             <CreatorInfo creator={creator} presale={presale} />
           </div>
           <div className="col-md-6">
