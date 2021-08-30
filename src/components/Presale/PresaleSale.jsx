@@ -78,7 +78,7 @@ const PresaleSale = ({ presale, creator }) => {
         <h1 className="mb-5 active">Presale</h1>
         <div className="container">
           <div className="row mb-3">
-            <div className="col-7">
+            <div className="col-lg-3">
               <h6>Sale Ends In</h6>
               <h1 style={{ "--primary": "#c44d16" }} className="active fw-bold">
                 {times
@@ -97,13 +97,13 @@ const PresaleSale = ({ presale, creator }) => {
                 />
               </h1>
             </div>
-            <div className="col-5">
+            <div className="col-lg-3">
               <h6>Price Per Unit</h6>
               <h1 className="active fw-bold">
                 ${+creator?.fraction_presale_price?.split("$")?.[0]}
               </h1>
             </div>
-            <div className="col-6">
+            <div className="col-lg-3">
               <h6>Unit Sold</h6>
               <h1 className="active fw-bold">
                 {(+presale.points_sold)?.toLocaleString()}/
@@ -124,15 +124,15 @@ const PresaleSale = ({ presale, creator }) => {
                 ></div>
               </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-12">
+            <div className="col-lg-3 text-end">
               <h6>Points You Own</h6>
               <h1 className="active fw-bold">
                 {(+activePresale.points_owned || 0)?.toLocaleString()}
               </h1>
             </div>
-            <div className="col-12">
+          </div>
+          <div className="row">
+            <div className="col-6 mx-auto">
               <h6>Buy Points</h6>
               <form onSubmit={handleSubmit} className="d-flex">
                 <TextField

@@ -77,11 +77,10 @@ const Presale = () => {
     <div id="presale_page">
       <div className="container">
         <div className="row">
-          <div className="col-md-6 py-5">
-            <PresaleSale creator={creator} presale={presale} />
-          </div>
           <div className="col-md-6">
             <CreatorInfo creator={creator} presale={presale} />
+          </div>
+          <div className="col-md-6">
             <div className="col-12 d-flex p-3 rounded-5 justify-content-center align-items-center">
               <div className="p-3 w-100 rounded-5 border border-2 colored-border">
                 <ReactPlayer className="objfit" url={creator.youtube_link} />
@@ -93,6 +92,7 @@ const Presale = () => {
             rewards={rewards}
             youtube_link={creator.youtube_link}
           />
+          <PresaleSale creator={creator} presale={presale} />
         </div>
       </div>
       <Rewards rewards={rewards} />

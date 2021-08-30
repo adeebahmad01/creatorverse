@@ -24,7 +24,7 @@ const CreatorInfo = ({ creator, presale, isProfile = false }) => {
     return `/${name}${presale?.id ? "/" + presale?.id : ""}`;
   };
   return (
-    <div className="py-5">
+    <div>
       <div className="container">
         <div className="row">
           <div className="col-12">
