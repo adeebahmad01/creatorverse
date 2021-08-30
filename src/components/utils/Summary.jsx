@@ -220,7 +220,10 @@ const Summary = ({ creator }) => {
             />
           </div>
         </div>
-        <hr />
+        <hr
+          className="active_bg rounded-pill"
+          style={{ height: 5, opacity: 1 }}
+        />
         <div className="row pt-4">
           <div className="col-lg-4">
             <h6>Points You Own</h6>

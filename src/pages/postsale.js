@@ -83,7 +83,7 @@ const Postsale = () => {
           <div className="col-lg-6">
             <CreatorInfo creator={creator} presale={presale} />
           </div>
-          <div className="col-lg-6">
+          <div className="col-lg-6 d-flex justify-content-center align-items-end">
             <div className="col-12 d-flex p-3 rounded-5 justify-content-center align-items-center">
               <div className="p-3 w-100 rounded-5 border border-2 colored-border">
                 <ReactPlayer className="objfit" url={creator.youtube_link} />
