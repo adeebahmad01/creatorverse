@@ -5,8 +5,8 @@ import { useData } from "./../../context/DataContext";
 import Menu from "@material-ui/core/Menu";
 import { MenuItem } from "@material-ui/core";
 import SearchBar from "../Searchbar";
-
-const Navbar = () => {
+import { Collapse } from "@material-ui/core";
+const Navbar = ({ isHome }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [searchOpen, setOpen] = useState(false);
   const { activeUser, setActiveUser, investors, setactiveIndex } = useData();
@@ -119,14 +119,9 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      {searchOpen && (
-        <div
-          className="position-absolute w-100"
-          style={{ left: 0, top: `100%` }}
-        >
-          <SearchBar />
-        </div>
-      )}
+      <Collapse in={searchOpen && !isHome}>
+        <SearchBar />
+      </Collapse>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -60,15 +60,21 @@ const PublicRoutes = ({ component: Comp, restricted = false, ...rest }) => {
 };
 
 function App() {
+  const [isHome, setIsHome] = useState(false);
   return (
     <HandleContextProvider>
       <DataContextProvider>
         <FunctionsContextProvider>
           <AuthContextProvider>
             <Router>
-              <Navbar />
+              <Navbar isHome={isHome} />
               <Switch>
-                <PublicRoutes exact path="/" exact component={Home} />
+                <PublicRoutes
+                  exact
+                  path="/"
+                  exact
+                  component={(p) => <Home {...p} setIsHome={setIsHome} />}
+                />
                 <PublicRoutes exact path="/portfolio" component={Portfolio} />
                 <PublicRoutes exact path="/rewardbay" component={RewardBay} />
                 <PublicRoutes exact path="/presale/:id" component={Presale} />
